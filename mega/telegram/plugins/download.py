@@ -69,7 +69,7 @@ async def download_user(bot, message):
         file_size = message.video.file_size
         file_size = humanbyte.format_size(message.video.file_size, binary=True)
     elif message.document is not None:
-        file_name = message.document.file_name
+        file_name_ = message.document.file_name
         file_size = message.document.file_size
         file_size = humanbyte.format_size(message.document.file_size, binary=True)
 
