@@ -6,6 +6,10 @@ class Translation(object):
 
 <i>Copy and paste this link in your browser and the file download will start immediately!!</i>
 
+<b>File Name :- </b> <code>{}</code>
+<b>File Size:-</b> <code>{}</code>
+<b>Direct Download Link:-</b> <i>{}</i>
+
 """
     START_TEXT = """Hᴇʏ 👋 {} 😍
 
