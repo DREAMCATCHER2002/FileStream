@@ -18,7 +18,7 @@ from translation import Translation
 from ..utils import filters
 
 def get_media_file_name(message):
-    media = m.video or m.document or m.audio
+    media = message.video or message.document
     if media and media.file_name:
         return urllib.parse.quote_plus(media.file_name)
     else:
