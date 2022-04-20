@@ -24,6 +24,15 @@ def get_media_file_name(message):
     else:
         return None
 
+def get_size(size):
+    units = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB"]
+    size = float(size)
+    i = 0
+    while size >= 1024.0 and i < len(units):
+        i += 1
+        size /= 1024.0
+    return "%.2f %s" % (size, units[i])
+
 
 @Client.on_message(filters.document | filters.video)
 async def download_user(bot, message):
@@ -66,12 +75,12 @@ async def download_user(bot, message):
     file_name = get_media_file_name(message)
     if message.video is not None:
         file_name_ = message.video.file_name
-        file_size = message.video.file_size
-        file_size = humanbyte.format_size(message.video.file_size, binary=True)
+        file_size = get_size(message.video.file_size)
+       # file_size = humanbyte.format_size(message.video.file_size, binary=True)
     elif message.document is not None:
         file_name_ = message.document.file_name
-        file_size = message.document.file_size
-        file_size = humanbyte.format_size(message.document.file_size, binary=True)
+        file_size = get_size(message.document.file_size)
+        #file_size = humanbyte.format_size(message.document.file_size, binary=True)
 
     file_link = f"https://{Common().web_fqdn}/MalluMovies/{fd_msg.message_id}/{file_name}" if Common().on_heroku else \
         f"http://{Common().web_fqdn}:{Common().web_port}/{fd_msg.message_id}"
