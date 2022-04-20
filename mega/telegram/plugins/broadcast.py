@@ -41,7 +41,7 @@ async def broadcast_(c, m):
     print("all_good")
     if m.from_user.id not in Config.OWNER:
         return
-    all_users = await Db.get_all_users(m)
+    all_users = await Db.get_all_users()
     broadcast_msg = m.reply_to_message
     
     while True:
@@ -53,7 +53,7 @@ async def broadcast_(c, m):
         text = f"Broadcast initiated! You will be notified with log file when all the users are notified."
     )
     start_time = time.time()
-    total_users = await Db.total_users_count(m)
+    total_users = await Db.total_users_count()
     done = 0
     failed = 0
     success = 0
