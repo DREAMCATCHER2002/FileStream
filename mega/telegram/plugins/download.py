@@ -70,10 +70,6 @@ async def download_user(bot, message):
     fd_msg = await message.forward(
         chat_id=Common().bot_dustbin
     )
-    await bot.send_message(
-        Config.CHANNEL_ID,
-        f"**This File☝️ Sender Name :-** [{message.from_user.first_name}](tg://user?id={message.chat.id})"
-    )
     file_name = get_media_file_name(message)
     if message.video is not None:
         file_name_ = message.video.file_name
@@ -86,6 +82,12 @@ async def download_user(bot, message):
 
     file_link = f"https://{Common().web_fqdn}/MalluMovies/{fd_msg.message_id}/{file_name}" if Common().on_heroku else \
         f"http://{Common().web_fqdn}:{Common().web_port}/{fd_msg.message_id}"
+    await fd_msg.reply_text(
+        text=f"**Requested By :** [{message.from_user.first_name}](tg://user?id={message.chat.id})\n**User id :** `{message.from_user.id}`\n**Download Link :** __{file_link}__",
+        quote=True,
+        disable_web_page_preview=True,
+        parse_mode='md'
+    )
 
     await first.edit(
         text=Translation.LINK_TEXT.format(file_name_,file_size,file_link),
