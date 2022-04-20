@@ -132,7 +132,7 @@ async def button(bot, update):
             InlineKeyboardButton('Close', callback_data='close_btn')
         ]]
         reply_markup = InlineKeyboardMarkup(btn)
-        await update.mesaage.edit_text(
+        await update.message.edit_text(
             text=Translation.ABOUT_TEXT,
             reply_markup=reply_markup,
             parse_mode="html",
