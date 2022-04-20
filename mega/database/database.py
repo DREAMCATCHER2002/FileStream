@@ -7,10 +7,8 @@ class Db:
     
     def __init__(self):
         self._client = motor.motor_asyncio.AsyncIOMotorClient(self.dburl)
-        self.db = self._client["RenameDXBot"]
+        self.db = self._client["FileToLink"]
         self.col = self.db.users
-        self.thumb = self.db.thumbnail
-        self.lang = self.db.LANGUAGE
     
     
     def new_user(self, id):
