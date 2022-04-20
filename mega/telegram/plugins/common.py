@@ -18,8 +18,9 @@ async def start(bot, update):
         InlineKeyboardButton('Close', callback_data='close_btn')
     ]]
     reply_markup = InlineKeyboardMarkup(btn)
-    await update.reply_text(
-        text=Translation.START_TEXT.format(update.from_user.first_name),
+    await update.reply_photo(
+        photo='https://te.legra.ph/file/e5830830ab2f987e694c0.jpg',
+        caption=Translation.START_TEXT.format(update.from_user.first_name),
         parse_mode="html",
         reply_markup=reply_markup,
         disable_web_page_preview=True)
