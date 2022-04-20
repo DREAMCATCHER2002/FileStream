@@ -72,6 +72,7 @@ class TGCustomYield:
 
         try:
             decoded = FileId.decode(file_id_str)
+            print(decoded)
             media_type = decoded[0]
 
             if media_type == 1:
