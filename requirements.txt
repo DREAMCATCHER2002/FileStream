@@ -36,7 +36,7 @@ TgCrypto==1.2.0
 uritemplate==3.0.1
 urllib3==1.25.10
 yarl==1.5.1
-pyrogram
+Pyrogram==1.0.7
 motor
 pymongo
 dnspython
