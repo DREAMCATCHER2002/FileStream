@@ -15,7 +15,7 @@ from pyrogram import filters, Client
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from pyrogram.errors import FloodWait, InputUserDeactivated, UserIsBlocked, PeerIdInvalid
 from sample_config import Config
-from mega.database import get_all_users, total_users_count, delete_user
+from mega.database.database import get_all_users, total_users_count, delete_user
 
 broadcast_ids = {}
 
