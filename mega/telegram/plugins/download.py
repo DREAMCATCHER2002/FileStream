@@ -63,7 +63,9 @@ async def download_user(bot, message):
             )
          )
          return
-    first = await message.reply_text("`Processing.... Please wait`")
+    first = await message.reply_text(
+        text="`Processing.... Please wait`",
+        reply_to_message_id=message.message_id)
     await asyncio.sleep(1)
     fd_msg = await message.forward(
         chat_id=Common().bot_dustbin
