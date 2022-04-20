@@ -6,7 +6,8 @@ from pyrogram.types import Message
 from mega.telegram import MegaDLBot
 from pyrogram import Client, utils, raw
 from pyrogram.session import Session, Auth
-from pyrogram.methods.messages.download_media import FileData
+#from pyrogram.methods.messages.download_media import FileData
+from mega.telegram.utils.filedata import FileData
 from pyrogram.errors import FileIdInvalid, AuthBytesInvalid
 
 
