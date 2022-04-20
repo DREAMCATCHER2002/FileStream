@@ -22,8 +22,7 @@ async def start(bot, update):
         photo='https://te.legra.ph/file/e5830830ab2f987e694c0.jpg',
         caption=Translation.START_TEXT.format(update.from_user.first_name),
         parse_mode="html",
-        reply_markup=reply_markup,
-        disable_web_page_preview=True)
+        reply_markup=reply_markup)
 
 @Client.on_message(filters.private & filters.command(["help"]))
 async def help_user(bot, update):
