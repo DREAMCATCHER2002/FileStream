@@ -8,10 +8,14 @@ from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, 
 from ...telegram import Common
 from translation import Translation
 from ..utils import filters
+from mega.database import db
 
 
 @Client.on_message(filters.private & filters.command(["start"]))
 async def start(bot, update):
+    if not await db.is_user_exist(update.chat.id):
+        await db.add_user(update.chat.id)
+        
     btn = [[
         InlineKeyboardButton('Help', callback_data='help_btn'),
         InlineKeyboardButton('About', callback_data='about_btn'),
