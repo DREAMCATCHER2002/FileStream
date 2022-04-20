@@ -7,6 +7,7 @@ from mega.telegram import MegaDLBot
 from pyrogram import Client, utils, raw
 from pyrogram.session import Session, Auth
 #from pyrogram.methods.messages.download_media import FileData
+from pyrogram.file_id import FileId
 from mega.telegram.utils.filedata import FileData
 from pyrogram.errors import FileIdInvalid, AuthBytesInvalid
 
@@ -70,7 +71,7 @@ class TGCustomYield:
             return dict(filter(lambda x: x[1] is not None, data.__dict__.items()))
 
         try:
-            decoded = utils.decode_file_id(file_id_str)
+            decoded = FileId.decode(file_id_str)
             media_type = decoded[0]
 
             if media_type == 1:
