@@ -86,7 +86,7 @@ async def download_user(bot, message):
         f"http://{Common().web_fqdn}:{Common().web_port}/{fd_msg.message_id}"
 
     await first.edit(
-        text=Translation.LINK_TEXT + Translation.FILE_NAME.format(file_name_) + Translation.FILE_SIZE.format(file_size) + Translation.FILE_LINK.format(file_link),
+        text=Translation.LINK_TEXT.format(file_name_,file_size,file_link),
         reply_markup=InlineKeyboardMarkup(
             [
                 [InlineKeyboardButton(text=f"📩 Download Link", url=file_link)],
