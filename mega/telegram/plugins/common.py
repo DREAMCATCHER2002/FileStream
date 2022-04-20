@@ -15,7 +15,10 @@ from mega.database import db
 async def start(bot, update):
     if not await db.is_user_exist(update.chat.id):
         await db.add_user(update.chat.id)
-        
+        await bot.send_message(
+            chat_id=Common().bot_dustbin,
+            text=f"**#NEWUSER**\n**{update.from_user.mention}",
+            parse_mode='md')        
     btn = [[
         InlineKeyboardButton('Help', callback_data='help_btn'),
         InlineKeyboardButton('About', callback_data='about_btn'),
