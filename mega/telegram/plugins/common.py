@@ -8,13 +8,13 @@ from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, 
 from ...telegram import Common
 from translation import Translation
 from ..utils import filters
-from mega.database import db
+from mega.database.database import is_user_exist, add_user
 
 
 @Client.on_message(filters.private & filters.command(["start"]))
 async def start(bot, update):
-    if not await db.is_user_exist(update.chat.id):
-        await db.add_user(update.chat.id)
+    if not await is_user_exist(update.chat.id):
+        await add_user(update.chat.id)
         await bot.send_message(
             chat_id=Common().bot_dustbin,
             text=f"**#NEWUSER**\n**{update.from_user.mention}",
