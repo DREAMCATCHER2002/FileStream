@@ -7,32 +7,28 @@ class Translation(object):
 <i>Copy and paste this link in your browser and the file download will start immediately!!</i>
 
 """
-    START_TEXT = """<b>Hai {}!!!</b>
-<code>Im Simple Telegram File to Permenant Link Generator Bot😜</code>
+    START_TEXT = """Hᴇʏ 👋 {} 😍
 
-<code>Add me to your Telegram channel🥳</code>
+I'ᴍ Sɪᴍᴘʟᴇ Tᴇʟᴇɢʀᴀᴍ Fɪʟᴇ ᴛᴏ Iɴꜱᴛᴀɴᴛ Pᴇʀᴍᴇɴᴀɴᴛ Dɪʀᴇᴄᴛ Lɪɴᴋ Gᴇɴᴇʀᴀᴛᴏʀ Bᴏᴛ 😜
 
-<b>» You Must Join My Updates Channel for using me</b>
+🔹 𝗪𝗔𝗥𝗡𝗜𝗡𝗚 🚸
 
-<i>Click Help Button For More Details</i>"""
-    HELP_TEXT = """<b>Hey {}!!, Please Folow these Steps</b>
+🔞 Pʀᴏɴ Cᴏɴᴛᴇɴᴛꜱ Lᴇᴀᴅꜱ ᴛᴏ Pᴇʀᴍᴀɴᴇɴᴛ Bᴀɴ Yᴏᴜ ❌
 
-➥ <code>Send the Media for which you need the permanent link.</code>
-➥ <code>Bot will send you the Download link.</code>
+🤖 Bᴏᴛ Wɪʟʟ Wᴏʀᴋ 24x7
 
-<b>New Feature</b>
+🍃 Rᴇϙᴜᴇsᴛ Mᴏᴠɪᴇs : @FileSearch1Bot"""
+    HELP_TEXT = """🔻 Sᴇɴᴅ ᴍᴇ ᴀɴʏ ꜰɪʟᴇ (ᴏʀ) ᴍᴇᴅɪᴀ ꜰʀᴏᴍ ᴛᴇʟᴇɢʀᴀᴍ.
+🔻 I ᴡɪʟʟ ᴘʀᴏᴠɪᴅᴇ ᴇxᴛᴇʀɴᴀʟ ᴅɪʀᴇᴄᴛ ᴅᴏᴡɴʟᴏᴀᴅ ʟɪɴᴋ !.
+🔻 Tʜɪs Pᴇʀᴍᴇᴀɴᴛ Lɪɴᴋ Wɪᴛʜ Fᴀsᴛᴇsᴛ Sᴘᴇᴇᴅ
+🔻 Bᴏᴛ Nᴏᴛ Sᴜᴘᴘᴏʀᴛ Cʜᴀɴɴᴇʟ Oʀ Gʀᴏᴜᴘ !
+🔻 Bᴏᴛ Wɪʟʟ Wᴏʀᴋ 24x7 !
 
-➥ <code>You Need Me in your Telegram Channel</code>
-➥ <code>Add me in your channel as admin with edit permissions!</code>
-➥ <code> I will add Direct Download Button to all newly posted files</code>
+🔸 𝗪𝗔𝗥𝗡𝗜𝗡𝗚 🚸
 
-<b>Available Commands</b>
+🔞 Pʀᴏɴ Cᴏɴᴛᴇɴᴛꜱ Lᴇᴀᴅꜱ ᴛᴏ Pᴇʀᴍᴀɴᴇɴᴛ Bᴀɴ Yᴏᴜ ❌
 
-/start - <b>Checking Bot Online</b>
-/help - <b>How To Use Me</b>
-/about - <b>More About Me</b>
-
-<i>Porn Contents will be gives you PERMANENT BAN</i>"""
+Cᴏɴᴛᴀᴄᴛ Dᴇᴠᴇʟᴏᴘᴇʀ (Oʀ) Rᴇᴘᴏʀᴛ Bᴜɢꜱ : <a href=https://t.me/OTTHelpbot>[ ᴄʟɪᴄᴋ ʜᴇʀᴇ ]</a>"""
     ABOUT_TEXT = """**➥ My Name** : ```File To Link Bot```
 **➥ Creator** : <a href=https://t.me/D_ar_k_Angel>Dark Angel</a>
 **➥ Credits** : ```Everyone in this journey```
@@ -43,6 +39,4 @@ class Translation(object):
 **➥ Build Status** : ```V01.1 [BETA]```"""
     KICK = """You Are <b>B A N N E D</b>🤪"""
     JOIN = """<code>Sorry Dear You Must Join My Updates Channel for using me 😌😜....</code>"""
-    FREE_USER_LIMIT_Q_SZE = """<b>Sorry Broh I'm not Only For U🥺</b>
-<code>01 request per 60 Seconds</code>
-<b><I>Try  After {} sec 🤓</I></b>"""
+    
