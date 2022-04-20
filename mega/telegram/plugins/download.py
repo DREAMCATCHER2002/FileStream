@@ -91,7 +91,7 @@ async def download_user(bot, message):
             [
                 [InlineKeyboardButton(text=f"📩 Download Link", url=file_link)],
                 [InlineKeyboardButton(text=f"Close 🔐",
-                                      callback_data=f"cancel_btn")]
+                                      callback_data=f"close_btn")]
             ]
         )
     )
@@ -99,6 +99,43 @@ async def download_user(bot, message):
 @Client.on_callback_query()
 async def button(bot, update):
     cb_data = update.data
-    if "cancel_btn" in cb_data:
+    if "close_btn" in cb_data:
         await update.message.delete()
+    elif "help_btn" in cb_data:
+        btn = [[
+            InlineKeyboardButton('Home', callback_data='home_btn'),
+            InlineKeyboardButton('About', callback_data='about_btn'),
+            InlineKeyboardButton('Close', callback_data='close_btn')
+        ]]
+        reply_markup = InlineKeyboardMarkup(btn)
+        await update.message.edit_text(
+            text=Translation.HELP_TEXT,
+            parse_mode="html",
+            reply_markup=reply_markup,
+            disable_web_page_preview=True)
+    elif "home_btn" in cb_data:
+        btn = [[
+            InlineKeyboardButton('Help', callback_data='help_btn'),
+            InlineKeyboardButton('About', callback_data='about_btn'),
+            InlineKeyboardButton('Close', callback_data='close_btn')
+        ]]
+        reply_markup = InlineKeyboardMarkup(btn)
+        await update.message.edit_text(
+            text=Translation.START_TEXT.format(update.from_user.first_name),
+            parse_mode="html",
+            reply_markup=reply_markup,
+            disable_web_page_preview=True)
+    elif "about_btn" in cb_data:
+        btn = [[
+            InlineKeyboardButton('Home', callback_data='home_btn'),
+            InlineKeyboardButton('Help', callback_data='help_btn'),
+            InlineKeyboardButton('Close', callback_data='close_btn')
+        ]]
+        reply_markup = InlineKeyboardMarkup(btn)
+        await update.mesaage.edit_text(
+            text=Translation.ABOUT_TEXT,
+            reply_markup=reply_markup,
+            parse_mode="html",
+            disable_web_page_preview=True)        
+        
     
