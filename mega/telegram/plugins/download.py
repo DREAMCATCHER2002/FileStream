@@ -71,7 +71,7 @@ async def download_user(bot, message):
                 return false
         except UserNotParticipant:
             btn = [[
-                InlineKeyboardButton('Join Channel', url=jn_link)
+                InlineKeyboardButton('Join Channel', url=f"https://t.me/{update_channel}")
             ]]
             reply = InlineKeyboardMarkup(btn)
             await message.reply_text(
