@@ -61,7 +61,7 @@ async def download_user(bot, message):
                 reply = InlineKeyboardMarkup(btn)
                 await message.reply_text(
                     text=Translation.JOIN,
-                    reply_markup=reply
+                    reply_markup=reply)
                 return
     else:
         update_channel = f_channel.username
@@ -86,8 +86,8 @@ async def download_user(bot, message):
                     ]
                  ]
                 )
-             )
-             return
+            )
+            return
         first = await message.reply_text(
             text="`Processing.... Please wait`",
             reply_to_message_id=message.message_id)
