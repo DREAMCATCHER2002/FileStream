@@ -1,6 +1,7 @@
 import traceback
 import asyncio
 import time
+import shutil
 import humanfriendly as humanbyte
 from pyrogram import filters, emoji, Client
 from pyrogram.errors import MessageNotModified, UserNotParticipant
