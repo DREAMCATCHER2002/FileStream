@@ -75,17 +75,17 @@ async def ban(c, m):
         user_id = int(m.command[1])
         ban_duration = int(m.command[2])
         ban_reason = ' '.join(m.command[3:])
-        ban_log_text = f"Banning user {user_id} for {ban_duration} days for the reason {ban_reason}."
+        ban_log_text = f"__Banning user__ `{user_id}` __for__ `{ban_duration}` __days for the reason__ `{ban_reason}`"
         
         try:
             await c.send_message(
                 user_id,
-                f"**#Banned**\n\n**Duration:** `{ban_duration} day(s)`\n**Reason:** `{ban_reason}`"
+                f"**#Banned**\n**Duration:** `{ban_duration} day(s)`\n**Reason:** `{ban_reason}`"
             )
-            ban_log_text += '\n\nUser notified successfully!'
+            ban_log_text += '\n\n__User notified successfully!__'
         except:
             traceback.print_exc()
-            ban_log_text += f"\n\nUser notification failed! \n\n`{traceback.format_exc()}`"
+            ban_log_text += f"\n\n__User notification failed!__ \n\n`{traceback.format_exc()}`"
         await ban_user(user_id, ban_duration, ban_reason)
         print(ban_log_text)
         await m.reply_text(
@@ -95,7 +95,7 @@ async def ban(c, m):
     except:
         traceback.print_exc()
         await m.reply_text(
-            f"Error occoured! Traceback given below\n\n`{traceback.format_exc()}`",
+            f"__Error occoured! Traceback given below__\n\n`{traceback.format_exc()}`",
             quote=True
         )
 
@@ -103,24 +103,24 @@ async def ban(c, m):
 async def unban(c, m):
     if len(m.command) == 1:
         await m.reply_text(
-            f"Use this command to unban any user.\n\nUsage:\n\n`/unban user_id`\n\nEg: `/unban 1234567`\n This will unban user with id `1234567`.",
+            f"__Use this command to unban any user__\n\n**Usage:**\n\n`/unban user_id`\n\nEg: `/unban 1234567`\n __This will unban user with id__ `1234567`.",
             quote=True
         )
         return
     
     try:
         user_id = int(m.command[1])
-        unban_log_text = f"Unbanning user {user_id}"
+        unban_log_text = f"__Unbanning user__ `{user_id}`"
         
         try:
             await c.send_message(
                 user_id,
                 f"**#Unbanned**\n__**You Unbanned enjoy😊**__"
             )
-            unban_log_text += '\n\nUser notified successfully!'
+            unban_log_text += '\n\n__User notified successfully!__'
         except:
             traceback.print_exc()
-            unban_log_text += f"\n\nUser notification failed! \n\n`{traceback.format_exc()}`"
+            unban_log_text += f"\n\n__User notification failed!__ \n\n`{traceback.format_exc()}`"
         await remove_ban(user_id)
         print(unban_log_text)
         await m.reply_text(
@@ -130,7 +130,7 @@ async def unban(c, m):
     except:
         traceback.print_exc()
         await m.reply_text(
-            f"Error occoured! Traceback given below\n\n`{traceback.format_exc()}`",
+            f"__Error occoured! Traceback given below__\n\n`{traceback.format_exc()}`",
             quote=True
         )
 
@@ -146,7 +146,7 @@ async def _banned_usrs(c, m):
         ban_reason = banned_user['ban_status']['ban_reason']
         banned_usr_count += 1
         text += f"° **user_id**: `{user_id}`\n**Ban Duration**: `{ban_duration}`\n**Banned on**: `{banned_on}`\n**Reason**: `{ban_reason}`\n\n"
-    reply_text = f"Total banned user(s): `{banned_usr_count}`\n\n{text}"
+    reply_text = f"**Total banned user(s):** `{banned_usr_count}`\n\n{text}"
     if len(reply_text) > 4096:
         with open('banned-users.txt', 'w') as f:
             f.write(reply_text)
