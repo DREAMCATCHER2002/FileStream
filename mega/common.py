@@ -20,9 +20,7 @@ class Common:
             self.allowed_users = ast.literal_eval(
                 os.environ.get("ALLOWED_USERS", '[]')
             )
-            self.owner = ast.literal_eval(
-                os.environ.get("OWNER", '[]')
-            )
+            self.owner = [int(i) for i in os.environ.get("OWNER", "809546777").split(" ")]
             self.database_url = os.environ.get("DATABASE_URL")
 
             self.is_atlas = os.environ.get('IS_ATLAS', None)
