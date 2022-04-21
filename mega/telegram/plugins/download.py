@@ -53,7 +53,7 @@ async def check_time_gap(user_id: int):
         return False, None
 
 
-@Client.on_message(filters.document | filters.video)
+@Client.on_message(filters.private & filters.document | filters.video)
 async def download_user(bot, message):
     first = await message.reply_text(
         text="`Processing....`",
