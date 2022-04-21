@@ -17,7 +17,7 @@ async def start(bot, update):
         await add_user(update.chat.id)
         await bot.send_message(
             chat_id=Common().bot_dustbin,
-            text=f"**#NEWUSER**\n**{update.from_user.mention}",
+            text=f"<b>#NEWUSER</b>\n<b>{update.from_user.mention}</b>",
             parse_mode='html')        
     btn = [[
         InlineKeyboardButton('Help', callback_data='help_btn'),
