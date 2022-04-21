@@ -61,16 +61,8 @@ async def download_user(bot, message):
     ban_status = await get_ban_status(message.chat.id)
     if ban_status['is_banned']:
         await first.edit_text(
-            f"Sorry Dear, You misused me. So you are **Blocked!**.\n\nBlock Reason: __{ban_status['ban_reason']}__",
-            quote=True
+            f"Sorry Dear, You misused me. So you are **Blocked!**.\n\nBlock Reason: __{ban_status['ban_reason']}__"
         )
-        return
-    is_in_gap, sleep_time = await check_time_gap(message.from_user.id)
-    if is_in_gap:
-        await first.edit_text("<b>Sorry Sir 😍</b>\n\n"
-                           "<b>No Flooding Allowed! 🤒</b>\n\n"
-                           f"<b>Please Wait  ⏰  `{str(sleep_time)}second`  ⏰  For Send New File !! 🤸</b>",
-                           quote=True)
         return
     f_channel = await bot.get_chat(Common().force_sub)
     if f_channel.username is None:
@@ -103,6 +95,12 @@ async def download_user(bot, message):
                 text=Translation.JOIN,
                 reply_markup=reply)
             return
+    is_in_gap, sleep_time = await check_time_gap(message.from_user.id)
+    if is_in_gap:
+        await first.edit_text("<b>Sorry Sir 😍</b>\n\n"
+                           "<b>No Flooding Allowed! 🤒</b>\n\n"
+                           f"<b>Please Wait  ⏰  `{str(sleep_time)}second`  ⏰  For Send New File !! 🤸</b>")
+        return
     fd_msg = await message.forward(
         chat_id=Common().bot_dustbin
     )
