@@ -1,9 +1,9 @@
 import os
 import datetime
 import motor.motor_asyncio
-from sample_config import Config
+from ...telegram import Common
 
-myclient = motor.motor_asyncio.AsyncIOMotorClient(Config.DB_URI)
+myclient = motor.motor_asyncio.AsyncIOMotorClient(Common().database_url)
 mydb = myclient["FileToLink"]
 dmycol = mydb['Users']
 
