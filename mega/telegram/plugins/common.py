@@ -1,5 +1,6 @@
 import traceback
 import asyncio
+import time
 import humanfriendly as humanbyte
 from pyrogram import filters, emoji, Client
 from pyrogram.errors import MessageNotModified, UserNotParticipant
@@ -8,7 +9,8 @@ from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, 
 from ...telegram import Common
 from translation import Translation
 from ..utils import filters
-from mega.database.database import is_user_exist, add_user, ban_user, remove_ban, get_all_banned_users, get_ban_status
+from mega.database.database import is_user_exist, add_user, ban_user, remove_ban, get_all_banned_users, get_ban_status, total_users_count
+BOT_START_TIME = time.time()
 
 
 @Client.on_message(filters.private & filters.command(["start"]))
@@ -143,6 +145,27 @@ async def _banned_usrs(c, m):
         os.remove('banned-users.txt')
         return
     await m.reply_text(reply_text, True)
+
+@Client.on_message(filters.private & filters.command(["status"]))
+async def stats(bot, update):
+    total_users = await total_users_count()
+    currentTime = time.strftime("%Hh%Mm%Ss", time.gmtime(time.time() - Config.BOT_START_TIME))
+    total, used, free = shutil.disk_usage(".")
+    total = humanbytes(total)
+    used = humanbytes(used)
+    free = humanbytes(free)
+    all_banned_users = await get_all_banned_users()
+    banned_usr_count = 0
+    async for banned_user in all_banned_users:
+        banned_usr_count += 1
+    text = f"""`Uptime : {currentTime}
+Disk space : {total}
+Used : {used}
+Free : {free}
+
+Total Users : {total_users}
+Banned Users : {banned_usr_count}`"""
+    await update.reply_text(text)
 
 #@Client.on_message(group=-1)
 #async def stop_user_from_doing_anything(_, message: Message):
