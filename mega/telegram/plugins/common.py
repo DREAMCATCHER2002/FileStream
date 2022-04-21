@@ -17,7 +17,7 @@ async def start(bot, update):
         await add_user(update.chat.id)
         await bot.send_message(
             chat_id=Common().bot_dustbin,
-            text=f"<b>#NEWUSER</b>\n<b>{update.from_user.mention}</b>",
+            text=f"<b>#NEWUSER</b>\n<b>Name : {update.from_user.mention}</b>\n<b>User id :</b> <code>{update.from_user.id}</code>",
             parse_mode='html')        
     btn = [[
         InlineKeyboardButton('Help', callback_data='help_btn'),
@@ -80,7 +80,7 @@ async def ban(c, m):
         try:
             await c.send_message(
                 user_id,
-                f"**#Banned**\n\n**Duration: `{ban_duration} day(s)`\n**Reason :** `{ban_reason}`"
+                f"**#Banned**\n\n**Duration:** `{ban_duration} day(s)`\n**Reason:** `{ban_reason}`"
             )
             ban_log_text += '\n\nUser notified successfully!'
         except:
@@ -115,7 +115,7 @@ async def unban(c, m):
         try:
             await c.send_message(
                 user_id,
-                f"**#Unbanned**\n\n__**You Unbanned enjoy**__"
+                f"**#Unbanned**\n__**You Unbanned enjoy😊**__"
             )
             unban_log_text += '\n\nUser notified successfully!'
         except:
