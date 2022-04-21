@@ -1,6 +1,7 @@
 import os
 import re
 import time
+importdatetime
 import secrets
 import asyncio
 import logging
@@ -14,6 +15,7 @@ from pyrogram.errors import MessageNotModified, UserNotParticipant
 from mega.telegram.utils.custom_download import TGCustomYield
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery, ForceReply
 from translation import Translation
+from mega.database.database import remove_ban, get_ban_status
 
 from ..utils import filters
 
@@ -36,6 +38,16 @@ def get_size(size):
 
 @Client.on_message(filters.document | filters.video)
 async def download_user(bot, message):
+    ban_status = await get_ban_status(message.chat_id)
+    if ban_status['is_banned']:
+        if (datetime.date.today() - datetime.date.fromisoformat(ban_status['banned_on'])).days > ban_status['ban_duration']:
+            await remove_ban(message.chat_id)
+        else:
+            await m.reply_text(
+                f"Sorry Dear, You misused me. So you are **Blocked!**.\n\nBlock Reason: __{ban_status['ban_reason']}__",
+                quote=True
+            )
+            return
 
     try:
         chat = await bot.get_chat_member("Dx_Botz", message.chat.id)
