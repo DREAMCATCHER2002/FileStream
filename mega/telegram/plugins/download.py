@@ -47,7 +47,7 @@ async def download_user(bot, message):
         return
     f_channel = await bot.get_chat(Common().force_sub)
     if f_channel.username is None:
-        update_channel = Commom().force_sub
+        update_channel = Common().force_sub
         jn_link = await bot.export_chat_invite_link(update_channel)
         if update_channel:
             try:
