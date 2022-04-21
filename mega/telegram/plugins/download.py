@@ -57,7 +57,7 @@ async def download_user(bot, message):
             chat = await bot.get_chat_member(update_channel, message.chat.id)
             if chat.status=='kicked':
                 return
-       except UserNotParticipant:
+        except UserNotParticipant:
             btn = [[
                 InlineKeyboardButton('Join Channel', url=jn_link)
             ]]
