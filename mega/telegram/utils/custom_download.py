@@ -71,7 +71,7 @@ class TGCustomYield:
             return dict(filter(lambda x: x[1] is not None, data.__dict__.items()))
 
         try:
-            decoded = FileId.decode(file_id_str)
+            decoded = utils.decode_file_id(file_id_str)
             print(decoded)
             media_type = decoded[0]
 
