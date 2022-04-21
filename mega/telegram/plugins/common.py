@@ -8,7 +8,7 @@ from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, 
 from ...telegram import Common
 from translation import Translation
 from ..utils import filters
-from mega.database.database import is_user_exist, add_user, ban_user
+from mega.database.database import is_user_exist, add_user, ban_user, remove_ban, get_all_banned_users
 
 
 @Client.on_message(filters.private & filters.command(["start"]))
@@ -98,6 +98,62 @@ async def ban(c, m):
             f"Error occoured! Traceback given below\n\n`{traceback.format_exc()}`",
             quote=True
         )
+
+@Client.on_message(filters.private & filters.command(["unban_user"]))
+async def unban(c, m):
+    if len(m.command) == 1:
+        await m.reply_text(
+            f"Use this command to unban any user.\n\nUsage:\n\n`/unban_user user_id`\n\nEg: `/unban_user 1234567`\n This will unban user with id `1234567`.",
+            quote=True
+        )
+        return
+    
+    try:
+        user_id = int(m.command[1])
+        unban_log_text = f"Unbanning user {user_id}"
+        
+        try:
+            await c.send_message(
+                user_id,
+                f"Your ban was lifted!"
+            )
+            unban_log_text += '\n\nUser notified successfully!'
+        except:
+            traceback.print_exc()
+            unban_log_text += f"\n\nUser notification failed! \n\n`{traceback.format_exc()}`"
+        await remove_ban(user_id)
+        print(unban_log_text)
+        await m.reply_text(
+            unban_log_text,
+            quote=True
+        )
+    except:
+        traceback.print_exc()
+        await m.reply_text(
+            f"Error occoured! Traceback given below\n\n`{traceback.format_exc()}`",
+            quote=True
+        )
+
+@Client.on_message(filters.private & filters.command(["banned_users"]))
+async def _banned_usrs(c, m):
+    all_banned_users = await get_all_banned_users()
+    banned_usr_count = 0
+    text = ''
+    async for banned_user in all_banned_users:
+        user_id = banned_user['id']
+        ban_duration = banned_user['ban_status']['ban_duration']
+        banned_on = banned_user['ban_status']['banned_on']
+        ban_reason = banned_user['ban_status']['ban_reason']
+        banned_usr_count += 1
+        text += f"> **user_id**: `{user_id}`, **Ban Duration**: `{ban_duration}`, **Banned on**: `{banned_on}`, **Reason**: `{ban_reason}`\n\n"
+    reply_text = f"Total banned user(s): `{banned_usr_count}`\n\n{text}"
+    if len(reply_text) > 4096:
+        with open('banned-users.txt', 'w') as f:
+            f.write(reply_text)
+        await m.reply_document('banned-users.txt', True)
+        os.remove('banned-users.txt')
+        return
+    await m.reply_text(reply_text, True)
 
 #@Client.on_message(group=-1)
 #async def stop_user_from_doing_anything(_, message: Message):
