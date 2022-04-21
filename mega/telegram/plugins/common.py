@@ -61,12 +61,12 @@ async def about_user(bot, update):
         parse_mode="html",
         disable_web_page_preview=True)
 
-@Client.on_message(filters.private & filters.command(["ban_user"]))
+@Client.on_message(filters.private & filters.command(["ban"]))
 async def ban(c, m):
     
     if len(m.command) == 1:
         await m.reply_text(
-            f"Use this command to ban any user from the bot.\n\nUsage:\n\n`/ban_user user_id ban_duration ban_reason`\n\nEg: `/ban_user 1234567 28 You misused me.`\n This will ban user with id `1234567` for `28` days for the reason `You misused me`.",
+            f"Use this command to ban any user from the bot.\n\nUsage:\n\n`/ban user_id ban_duration ban_reason`\n\nEg: `/ban 1234567 28 You misused me.`\n This will ban user with id `1234567` for `28` days for the reason `You misused me`.",
             quote=True
         )
         return
@@ -80,7 +80,7 @@ async def ban(c, m):
         try:
             await c.send_message(
                 user_id,
-                f"You are banned to use this bot for **{ban_duration}** day(s) for the reason __{ban_reason}__ \n\n**Message from the admin**"
+                f"**#Banned**\n\n**Duration: `{ban_duration} day(s)`\n**Reason :** `{ban_reason}`"
             )
             ban_log_text += '\n\nUser notified successfully!'
         except:
@@ -99,11 +99,11 @@ async def ban(c, m):
             quote=True
         )
 
-@Client.on_message(filters.private & filters.command(["unban_user"]))
+@Client.on_message(filters.private & filters.command(["unban"]))
 async def unban(c, m):
     if len(m.command) == 1:
         await m.reply_text(
-            f"Use this command to unban any user.\n\nUsage:\n\n`/unban_user user_id`\n\nEg: `/unban_user 1234567`\n This will unban user with id `1234567`.",
+            f"Use this command to unban any user.\n\nUsage:\n\n`/unban user_id`\n\nEg: `/unban 1234567`\n This will unban user with id `1234567`.",
             quote=True
         )
         return
@@ -115,7 +115,7 @@ async def unban(c, m):
         try:
             await c.send_message(
                 user_id,
-                f"Your ban was lifted!"
+                f"**#Unbanned**\n\n__**You Unbanned enjoy**__"
             )
             unban_log_text += '\n\nUser notified successfully!'
         except:
@@ -145,7 +145,7 @@ async def _banned_usrs(c, m):
         banned_on = banned_user['ban_status']['banned_on']
         ban_reason = banned_user['ban_status']['ban_reason']
         banned_usr_count += 1
-        text += f"> **user_id**: `{user_id}`, **Ban Duration**: `{ban_duration}`, **Banned on**: `{banned_on}`, **Reason**: `{ban_reason}`\n\n"
+        text += f"° **user_id**: `{user_id}`\n**Ban Duration**: `{ban_duration}`\n**Banned on**: `{banned_on}`\n**Reason**: `{ban_reason}`\n\n"
     reply_text = f"Total banned user(s): `{banned_usr_count}`\n\n{text}"
     if len(reply_text) > 4096:
         with open('banned-users.txt', 'w') as f:
