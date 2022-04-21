@@ -39,7 +39,9 @@ async def send_msg(user_id, message):
 @Client.on_message(filters.private & filters.command(["broadcast"]) & filters.reply, group = 1)
 async def broadcast_(c, m):
     print("all_good")
-    if m.from_user.id not in Common().owner:
+    owner = Common().owner
+    print(owner)
+    if m.from_user.id not in owner:
         return
     all_users = await get_all_users()
     broadcast_msg = m.reply_to_message
