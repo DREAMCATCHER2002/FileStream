@@ -8,7 +8,7 @@ from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, 
 from ...telegram import Common
 from translation import Translation
 from ..utils import filters
-from mega.database.database import is_user_exist, add_user, ban_user, remove_ban, get_all_banned_users
+from mega.database.database import is_user_exist, add_user, ban_user, remove_ban, get_all_banned_users, get_ban_status
 
 
 @Client.on_message(filters.private & filters.command(["start"]))
