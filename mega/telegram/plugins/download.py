@@ -66,27 +66,17 @@ async def download_user(bot, message):
     else:
         update_channel = f_channel.username
         try:
-            chat = await bot.get_chat_member("Dx_Botz", message.chat.id)
+            chat = await bot.get_chat_member(update_channel, message.chat.id)
             if chat.status=='kicked':
-                await bot.send_message(
-                    chat_id=message.chat.id,
-                    text=Translation.KICK,
-                    reply_to_message_id=message.message_id
-                )
                 return false
         except UserNotParticipant:
-            await bot.send_message(
-                chat_id=message.chat.id,
+            btn = [[
+                InlineKeyboardButton('Join Channel', url=jn_link)
+            ]]
+            reply = InlineKeyboardMarkup(btn)
+            await message.reply_text(
                 text=Translation.JOIN,
-                reply_to_message_id=message.message_id,
-                reply_markup=InlineKeyboardMarkup(
-                 [
-                    [
-                        InlineKeyboardButton('😎 Join Channel 😎', url='https://t.me/Dx_BotZ'),
-                    ]
-                 ]
-                )
-            )
+                reply_markup=reply)
             return
         first = await message.reply_text(
             text="`Processing.... Please wait`",
