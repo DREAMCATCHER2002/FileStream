@@ -49,22 +49,24 @@ async def download_user(bot, message):
     if f_channel.username is None:
         update_channel = Common().force_sub
         jn_link = await bot.export_chat_invite_link(update_channel)
-        if update_channel:
-            try:
-                chat = await bot.get_chat_member(update_channel, message.chat.id)
-                if chat.status=='kicked':
-                    return
-            except UserNotParticipant:
-                btn = [[
-                    InlineKeyboardButton('Join Channel', url=jn_link)
-                ]]
-                reply = InlineKeyboardMarkup(btn)
-                await message.reply_text(
-                    text=Translation.JOIN,
-                    reply_markup=reply)
-                return
     else:
         update_channel = f_channel.username
+
+    if update_channel.startswith("-100"):
+        try:
+            chat = await bot.get_chat_member(update_channel, message.chat.id)
+            if chat.status=='kicked':
+                return
+       except UserNotParticipant:
+            btn = [[
+                InlineKeyboardButton('Join Channel', url=jn_link)
+            ]]
+            reply = InlineKeyboardMarkup(btn)
+            await message.reply_text(
+                text=Translation.JOIN,
+                reply_markup=reply)
+            return
+    else:
         try:
             chat = await bot.get_chat_member(update_channel, message.chat.id)
             if chat.status=='kicked':
@@ -78,43 +80,44 @@ async def download_user(bot, message):
                 text=Translation.JOIN,
                 reply_markup=reply)
             return
-        first = await message.reply_text(
-            text="`Processing.... Please wait`",
-            reply_to_message_id=message.message_id)
-        await asyncio.sleep(1)
-        fd_msg = await message.forward(
-            chat_id=Common().bot_dustbin
-        )
-        file_name = get_media_file_name(message)
-        if message.video is not None:
-            file_name_ = message.video.file_name
-            file_size = get_size(message.video.file_size)
-           # file_size = humanbyte.format_size(message.video.file_size, binary=True)
-        elif message.document is not None:
-            file_name_ = message.document.file_name
-            file_size = get_size(message.document.file_size)
-            #file_size = humanbyte.format_size(message.document.file_size, binary=True)
 
-        file_link = f"https://{Common().web_fqdn}/MalluMovies/{fd_msg.message_id}/{file_name}" if Common().on_heroku else \
-            f"http://{Common().web_fqdn}:{Common().web_port}/{fd_msg.message_id}"
-        await fd_msg.reply_text(
-            text=f"**Requested By :** [{message.from_user.first_name}](tg://user?id={message.chat.id})\n**User id :** `{message.from_user.id}`\n**Download Link :** __{file_link}__",
-            quote=True,
-            disable_web_page_preview=True,
-            parse_mode='md'
-        )
+    first = await message.reply_text(
+        text="`Processing.... Please wait`",
+        reply_to_message_id=message.message_id)
+    await asyncio.sleep(1)
+    fd_msg = await message.forward(
+        chat_id=Common().bot_dustbin
+    )
+    file_name = get_media_file_name(message)
+    if message.video is not None:
+        file_name_ = message.video.file_name
+        file_size = get_size(message.video.file_size)
+       # file_size = humanbyte.format_size(message.video.file_size, binary=True)
+    elif message.document is not None:
+        file_name_ = message.document.file_name
+        file_size = get_size(message.document.file_size)
+        #file_size = humanbyte.format_size(message.document.file_size, binary=True)
 
-        await first.edit(
-            text=Translation.LINK_TEXT.format(file_name_,file_size,file_link),
-            disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup(
-                [
-                    [InlineKeyboardButton(text=f"📩 Download Link", url=file_link)],
-                    [InlineKeyboardButton(text=f"Close 🔐",
+    file_link = f"https://{Common().web_fqdn}/MalluMovies/{fd_msg.message_id}/{file_name}" if Common().on_heroku else \
+        f"http://{Common().web_fqdn}:{Common().web_port}/{fd_msg.message_id}"
+    await fd_msg.reply_text(
+        text=f"**Requested By :** [{message.from_user.first_name}](tg://user?id={message.chat.id})\n**User id :** `{message.from_user.id}`\n**Download Link :** __{file_link}__",
+        quote=True,
+        disable_web_page_preview=True,
+        parse_mode='md'
+    )
+
+    await first.edit(
+        text=Translation.LINK_TEXT.format(file_name_,file_size,file_link),
+        disable_web_page_preview=True,
+        reply_markup=InlineKeyboardMarkup(
+            [
+                [InlineKeyboardButton(text=f"📩 Download Link", url=file_link)],
+                [InlineKeyboardButton(text=f"Close 🔐",
                                           callback_data=f"close_btn")]
-                ]
-            )
+            ]
         )
+    )
 
 @Client.on_callback_query()
 async def button(bot, update):
