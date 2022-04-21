@@ -80,7 +80,7 @@ async def about_user(bot, update):
 async def banuser(bot, message):
     owner = Common().owner
     if message.from_user.id not in owner:
-        await message.reply_text(__This is not for you__)
+        await message.reply_text("__This is not for you__")
         return
     if len(message.command) == 1:
         return await message.reply('<b>Give me a user id</b>')
@@ -118,7 +118,7 @@ async def banuser(bot, message):
 async def unban_a_user(bot, message):
     owner = Common().owner
     if message.from_user.id not in owner:
-        await message.reply_text(__This is not for you__)
+        await message.reply_text("__This is not for you__")
         return
     if len(message.command) == 1:
         return await message.reply('<b>Give me a user id</b>')
@@ -152,7 +152,7 @@ async def unban_a_user(bot, message):
 async def _banned_usrs(c, m):
     owner = Common().owner
     if m.from_user.id not in owner:
-        await m.reply_text(__This is not for you__)
+        await m.reply_text("__This is not for you__")
         return
     all_banned_users = await get_all_banned_users()
     banned_usr_count = 0
