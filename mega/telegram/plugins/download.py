@@ -91,6 +91,7 @@ async def download_user(bot, message):
 
     await first.edit(
         text=Translation.LINK_TEXT.format(file_name_,file_size,file_link),
+        disable_web_page_preview=True,
         reply_markup=InlineKeyboardMarkup(
             [
                 [InlineKeyboardButton(text=f"📩 Download Link", url=file_link)],
