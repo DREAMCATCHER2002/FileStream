@@ -55,18 +55,21 @@ async def check_time_gap(user_id: int):
 
 @Client.on_message(filters.document | filters.video)
 async def download_user(bot, message):
+    first = await message.reply_text(
+        text="`Processing....`",
+        reply_to_message_id=message.message_id)
     ban_status = await get_ban_status(message.chat.id)
     if ban_status['is_banned']:
-        await message.reply_text(
+        await first.edit_text(
             f"Sorry Dear, You misused me. So you are **Blocked!**.\n\nBlock Reason: __{ban_status['ban_reason']}__",
             quote=True
         )
         return
     is_in_gap, sleep_time = await check_time_gap(message.from_user.id)
     if is_in_gap:
-        await message.reply_text("<b>Sorry Sir 😍</b>\n\n"
+        await first.edit_text("<b>Sorry Sir 😍</b>\n\n"
                            "<b>No Flooding Allowed! 🤒</b>\n\n"
-                           f"<b>Please Wait  ⏰  `<u>{str(sleep_time)}second`  ⏰  For Send New File !! 🤸</b>",
+                           f"<b>Please Wait  ⏰  `{str(sleep_time)}second`  ⏰  For Send New File !! 🤸</b>",
                            quote=True)
         return
     f_channel = await bot.get_chat(Common().force_sub)
@@ -82,7 +85,7 @@ async def download_user(bot, message):
                 InlineKeyboardButton('Join Channel', url=jn_link)
             ]]
             reply = InlineKeyboardMarkup(btn)
-            await message.reply_text(
+            await first.edit_text(
                 text=Translation.JOIN,
                 reply_markup=reply)
             return
@@ -96,15 +99,10 @@ async def download_user(bot, message):
                 InlineKeyboardButton('Join Channel', url=f"https://t.me/{f_channel.username}")
             ]]
             reply = InlineKeyboardMarkup(btn)
-            await message.reply_text(
+            await first.edit_text(
                 text=Translation.JOIN,
                 reply_markup=reply)
             return
-
-    first = await message.reply_text(
-        text="`Processing.... Please wait`",
-        reply_to_message_id=message.message_id)
-    await asyncio.sleep(1)
     fd_msg = await message.forward(
         chat_id=Common().bot_dustbin
     )
