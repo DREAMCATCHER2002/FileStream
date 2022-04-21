@@ -71,9 +71,9 @@ class TGCustomYield:
             return dict(filter(lambda x: x[1] is not None, data.__dict__.items()))
 
         try:
-            decoded = utils.decode_file_id(file_id_str)
-            print(decoded)
-            media_type = decoded[0]
+            decoded = FileId.decode(file_id_str)
+            media_type = decoded.file_type
+            print(media_type)
 
             if media_type == 1:
                 unpacked = struct.unpack("<iiqqqiiiqi", decoded)
