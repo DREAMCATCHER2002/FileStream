@@ -13,6 +13,18 @@ from mega.database.database import is_user_exist, add_user, ban_user, remove_ban
 
 BOT_START_TIME = time.time()
 
+def humanbytes(size):
+    if not size:
+        return ""
+    power = 2**10
+    n = 0
+    Dic_powerN = {0: ' ', 1: 'K', 2: 'M', 3: 'G', 4: 'T'}
+    while size > power:
+        size /= power
+        n += 1
+    return str(round(size, 2)) + " " + Dic_powerN[n] + 'B'
+
+
 
 @Client.on_message(filters.private & filters.command(["start"]))
 async def start(bot, update):
