@@ -48,10 +48,10 @@ async def media_group_streamer(request, message_id: int, chat_id: int):
     if range_header:
         from_bytes, until_bytes = range_header.replace('bytes=', '').split('-')
         from_bytes = int(from_bytes)
-        until_bytes = int(until_bytes) if until_bytes else file_size
+        until_bytes = int(until_bytes) if until_bytes else file_size - 1
     else:
         from_bytes = request.http_range.start or 0
-        until_bytes = request.http_range.stop or file_size
+        until_bytes = request.http_range.stop or file_size - 1
 
     req_length = until_bytes - from_bytes
 
@@ -80,7 +80,7 @@ async def media_group_streamer(request, message_id: int, chat_id: int):
     )
 
     if return_resp.status == 200:
-        return_resp.headers.add("Content-Length", str(req_length))
+        return_resp.headers.add("Content-Length", str(file_size))
 
     return return_resp
 
@@ -95,10 +95,10 @@ async def media_streamer(request, message_id: int):
     if range_header:
         from_bytes, until_bytes = range_header.replace('bytes=', '').split('-')
         from_bytes = int(from_bytes)
-        until_bytes = int(until_bytes) if until_bytes else file_size
+        until_bytes = int(until_bytes) if until_bytes else file_size - 1
     else:
         from_bytes = request.http_range.start or 0
-        until_bytes = request.http_range.stop or file_size
+        until_bytes = request.http_range.stop or file_size - 1
 
     req_length = until_bytes - from_bytes
 
@@ -127,7 +127,7 @@ async def media_streamer(request, message_id: int):
     )
 
     if return_resp.status == 200:
-        return_resp.headers.add("Content-Length", str(req_length))
+        return_resp.headers.add("Content-Length", str(file_size))
 
     return return_resp
 
