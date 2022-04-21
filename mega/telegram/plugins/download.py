@@ -67,7 +67,7 @@ async def download_user(bot, message):
         update_channel = f_channel.username
         try:
             chat = await bot.get_chat_member("Dx_Botz", message.chat.id)
-             if chat.status=='kicked':
+            if chat.status=='kicked':
                 await bot.send_message(
                     chat_id=message.chat.id,
                     text=Translation.KICK,
