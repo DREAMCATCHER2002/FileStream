@@ -14,7 +14,7 @@ from random import choice
 from pyrogram import filters, Client
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from pyrogram.errors import FloodWait, InputUserDeactivated, UserIsBlocked, PeerIdInvalid
-from ...telegram import Common
+from mega.common import Common
 from mega.database.database import get_all_users, total_users_count, delete_user
 
 broadcast_ids = {}
