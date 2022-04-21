@@ -40,14 +40,11 @@ def get_size(size):
 async def download_user(bot, message):
     ban_status = await get_ban_status(message.chat.id)
     if ban_status['is_banned']:
-        if (datetime.date.today() - datetime.date.fromisoformat(ban_status['banned_on'])).days > ban_status['ban_duration']:
-            await remove_ban(message.chat.id)
-        else:
-            await message.reply_text(
-                f"Sorry Dear, You misused me. So you are **Blocked!**.\n\nBlock Reason: __{ban_status['ban_reason']}__",
-                quote=True
-            )
-            return
+        await message.reply_text(
+            f"Sorry Dear, You misused me. So you are **Blocked!**.\n\nBlock Reason: __{ban_status['ban_reason']}__",
+            quote=True
+        )
+        return
 
     try:
         chat = await bot.get_chat_member("Dx_Botz", message.chat.id)
