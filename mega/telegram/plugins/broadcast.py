@@ -14,7 +14,7 @@ from random import choice
 from pyrogram import filters, Client
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from pyrogram.errors import FloodWait, InputUserDeactivated, UserIsBlocked, PeerIdInvalid
-from sample_config import Config
+from ...telegram import Common
 from mega.database.database import get_all_users, total_users_count, delete_user
 
 broadcast_ids = {}
@@ -39,7 +39,7 @@ async def send_msg(user_id, message):
 @Client.on_message(filters.private & filters.command(["broadcast"]) & filters.reply, group = 1)
 async def broadcast_(c, m):
     print("all_good")
-    if m.from_user.id not in Config.OWNER:
+    if m.from_user.id not in Common().owner:
         return
     all_users = await get_all_users()
     broadcast_msg = m.reply_to_message
