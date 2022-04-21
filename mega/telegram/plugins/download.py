@@ -16,8 +16,9 @@ from mega.telegram.utils.custom_download import TGCustomYield
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery, ForceReply
 from translation import Translation
 from mega.database.database import remove_ban, get_ban_status
-
 from ..utils import filters
+
+GAP = {}
 
 def get_media_file_name(message):
     media = message.video or message.document
@@ -35,6 +36,22 @@ def get_size(size):
         size /= 1024.0
     return "%.2f %s" % (size, units[i])
 
+async def check_time_gap(user_id: int):
+    """A Function for checking user time gap!
+    :parameter user_id Telegram User ID"""
+
+    if str(user_id) in GAP:
+        current_time = time.time()
+        previous_time = GAP[str(user_id)]
+        if round(current_time - previous_time) < Common().time_gap:
+            return True, round(previous_time - current_time + Common().time_gap)
+        elif round(current_time - previous_time) >= Common().time_gap:
+            del GAP[str(user_id)]
+            return False, None
+    elif str(user_id) not in GAP:
+        GAP[str(user_id)] = time.time()
+        return False, None
+
 
 @Client.on_message(filters.document | filters.video)
 async def download_user(bot, message):
@@ -44,6 +61,13 @@ async def download_user(bot, message):
             f"Sorry Dear, You misused me. So you are **Blocked!**.\n\nBlock Reason: __{ban_status['ban_reason']}__",
             quote=True
         )
+        return
+    is_in_gap, sleep_time = await check_time_gap(message.from_user.id)
+    if is_in_gap:
+        await message.reply_text("<b>Sorry Sir 😍</b>\n\n"
+                           "<b>No Flooding Allowed! 🤒</b>\n\n"
+                           f"<b>Please Wait  ⏰  `<u>{str(sleep_time)}second`  ⏰  For Send New File !! 🤸</b>",
+                           quote=True)
         return
     f_channel = await bot.get_chat(Common().force_sub)
     if f_channel.username is None:
