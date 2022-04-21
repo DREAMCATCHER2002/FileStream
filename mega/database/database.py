@@ -18,6 +18,7 @@ def new_user(id):
             ban_reason=''
         )
     )
+
 async def add_user(id):
     user = new_user(id)
     await dmycol.insert_one(user)
