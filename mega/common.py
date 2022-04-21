@@ -23,6 +23,7 @@ class Common:
             self.owner = [int(i) for i in os.environ.get("OWNER", "809546777").split(" ")]
             self.database_url = os.environ.get("DATABASE_URL")
             self.force_sub = int(os.environ.get("FORCE_SUB_CHANNEL", "-100"))
+            self.time_gap = int(os.environ.get("TIME_GAP"))
             self.is_atlas = os.environ.get('IS_ATLAS', None)
 
             self.web_port = os.environ.get("WEB_SERVER_PORT", 8080)
