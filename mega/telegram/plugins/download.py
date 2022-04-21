@@ -49,10 +49,6 @@ async def download_user(bot, message):
     if f_channel.username is None:
         update_channel = Common().force_sub
         jn_link = await bot.export_chat_invite_link(update_channel)
-    else:
-        update_channel = f_channel.username
-
-    if update_channel.startswith("-100"):
         try:
             chat = await bot.get_chat_member(update_channel, message.chat.id)
             if chat.status=='kicked':
@@ -68,12 +64,12 @@ async def download_user(bot, message):
             return
     else:
         try:
-            chat = await bot.get_chat_member(update_channel, message.chat.id)
+            chat = await bot.get_chat_member(f_channel.username, message.chat.id)
             if chat.status=='kicked':
                 return false
         except UserNotParticipant:
             btn = [[
-                InlineKeyboardButton('Join Channel', url=f"https://t.me/{update_channel}")
+                InlineKeyboardButton('Join Channel', url=f"https://t.me/{f_channel.username}")
             ]]
             reply = InlineKeyboardMarkup(btn)
             await message.reply_text(
