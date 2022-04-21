@@ -61,91 +61,80 @@ async def about_user(bot, update):
         parse_mode="html",
         disable_web_page_preview=True)
 
-@Client.on_message(filters.private & filters.command(["ban"]))
-async def ban(c, m):
-    
-    if len(m.command) == 1:
-        await m.reply_text(
-            f"__Use this command to ban any user from the bot__\n**Usage:**\n`/ban __user_id ban_duration ban_reason__`\n**Eg:** `/ban 1234567 28 You misused me.`\n__(This will ban user with id__ `1234567` __for__ `28` __days for the reason__ `You misused me`__)__",
-            quote=True
-        )
-        return
-    
+@Client.on_message(filters.private & filters.command('ban'))
+async def banuser(bot, message):
+    if len(message.command) == 1:
+        return await message.reply('<b>Give me a user id</b>')
+    r = message.text.split(None)
+    if len(r) > 2:
+        reason = message.text.split(None, 2)[2]
+        chat = message.text.split(None, 2)[1]
+    else:
+        chat = message.command[1]
+        reason = "<b>No reason Provided 🤔</b>"
     try:
-        user_id = int(m.command[1])
-        ban_duration = int(m.command[2])
-        ban_reason = ' '.join(m.command[3:])
-        ban_log_text = f"__Banning user__ `{user_id}` __for__ `{ban_duration}` __days for the reason__ `{ban_reason}`"
-        
-        try:
-            await c.send_message(
-                user_id,
-                f"**#Banned**\n**Duration:** `{ban_duration} day(s)`\n**Reason:** `{ban_reason}`"
-            )
-            ban_log_text += '\n\n__User notified successfully!__'
-        except:
-            traceback.print_exc()
-            ban_log_text += f"\n\n__User notification failed!__ \n\n`{traceback.format_exc()}`"
-        await ban_user(user_id, ban_duration, ban_reason)
-        print(ban_log_text)
-        await m.reply_text(
-            ban_log_text,
-            quote=True
-        )
+        chat = int(chat)
     except:
-        traceback.print_exc()
-        await m.reply_text(
-            f"__Error occoured! Traceback given below__\n\n`{traceback.format_exc()}`",
-            quote=True
-        )
-
-@Client.on_message(filters.private & filters.command(["unban"]))
-async def unban(c, m):
-    if len(m.command) == 1:
-        await m.reply_text(
-            f"__Use this command to unban any user__\n**Usage:**\n\n`/unban user_id`\n**Eg:** `/unban 1234567`\n __(This will unban user with id)__ `1234567`.",
-            quote=True
-        )
-        return
-    
+        pass
     try:
-        user_id = int(m.command[1])
-        unban_log_text = f"__Unbanning user__ `{user_id}`"
-        
-        try:
-            await c.send_message(
-                user_id,
-                f"**#Unbanned**\n__**You Unbanned enjoy😊**__"
-            )
-            unban_log_text += '\n\n__User notified successfully!__'
-        except:
-            traceback.print_exc()
-            unban_log_text += f"\n\n__User notification failed!__ \n\n`{traceback.format_exc()}`"
-        await remove_ban(user_id)
-        print(unban_log_text)
-        await m.reply_text(
-            unban_log_text,
-            quote=True
+        k = await bot.get_users(chat)
+    except PeerIdInvalid:
+        return await message.reply("<b>This is an invalid user, make sure ia have met him before.</b>")
+    except IndexError:
+        return await message.reply("<b>This might be a channel, make sure its a user.</b>")
+    except Exception as e:
+        return await message.reply(f'Error - {e}')
+    else:
+        jar = await get_ban_status(k.id)
+        if jar['is_banned']:
+            return await message.reply(f"<b>{k.mention} is already banned\n\nReason : {jar['ban_reason']}</b>")
+        await ban_user(k.id, reason)
+        await message.reply(f"<b>Successfully Banned : {k.mention} ✔️</b>")
+        await bot.send_message(
+            Common().bot_dustbin,
+            f"<b>Uꜱᴇʀ Nᴀᴍᴇ : [{k.mention}](tg://user?id={k.id})\nUꜱᴇʀ ɪᴅ : {k.id}\nSᴛᴀᴛᴜꜱ : #Banned ✔️\nBᴀɴ Rᴇᴀꜱᴏɴ : {reason}\nTɪᴍᴇ Lɪᴍɪᴛ : Permanent</b>"
         )
+  
+@Client.on_message(filters.private & filters.command('unban'))
+async def unban_a_user(bot, message):
+    if len(message.command) == 1:
+        return await message.reply('<b>Give me a user id</b>')
+    r = message.text.split(None)
+    if len(r) > 2:
+        reason = message.text.split(None, 2)[2]
+        chat = message.text.split(None, 2)[1]
+    else:
+        chat = message.command[1]
+        reason = "<b>No Reason Provided</b> 🤔"
+    try:
+        chat = int(chat)
     except:
-        traceback.print_exc()
-        await m.reply_text(
-            f"__Error occoured! Traceback given below__\n\n`{traceback.format_exc()}`",
-            quote=True
-        )
+        pass
+    try:
+        k = await bot.get_users(chat)
+    except PeerIdInvalid:
+        return await message.reply("<b>This is an invalid user, make sure ia have met him before.</b>")
+    except IndexError:
+        return await message.reply("<b>Thismight be a channel, make sure its a user.</b>")
+    except Exception as e:
+        return await message.reply(f'Error - {e}')
+    else:
+        jar = await get_ban_status(k.id)
+        if not jar['is_banned']:
+            return await message.reply(f"<b>{k.mention} is not yet banned.</b>")
+        await remove_ban(k.id)
+        await message.reply(f"<b>Successfully Unbanned : {k.mention} 🤝</b>")
 
-@Client.on_message(filters.private & filters.command(["banned_users"]))
+@Client.on_message(filters.private & filters.command(["banlist"]))
 async def _banned_usrs(c, m):
     all_banned_users = await get_all_banned_users()
     banned_usr_count = 0
     text = ''
     async for banned_user in all_banned_users:
         user_id = banned_user['id']
-        ban_duration = banned_user['ban_status']['ban_duration']
-        banned_on = banned_user['ban_status']['banned_on']
         ban_reason = banned_user['ban_status']['ban_reason']
         banned_usr_count += 1
-        text += f"° **user_id**: `{user_id}`\n**Ban Duration**: `{ban_duration}`\n**Banned on**: `{banned_on}`\n**Reason**: `{ban_reason}`\n\n"
+        text += f"° **user_id**: `{user_id}`\n**Reason**: `{ban_reason}`\n\n"
     reply_text = f"**Total banned user(s):** `{banned_usr_count}`\n\n{text}"
     if len(reply_text) > 4096:
         with open('banned-users.txt', 'w') as f:
