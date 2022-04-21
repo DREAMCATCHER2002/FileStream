@@ -40,8 +40,8 @@ async def send_msg(user_id, message):
 async def broadcast_(c, m):
     print("all_good")
     owner = Common().owner
-    print(owner)
     if m.from_user.id not in owner:
+        await m.reply_text("__This is not for you__")
         return
     all_users = await get_all_users()
     broadcast_msg = m.reply_to_message
