@@ -5,11 +5,11 @@ import humanfriendly as humanbyte
 from pyrogram import filters, emoji, Client
 from pyrogram.errors import MessageNotModified, UserNotParticipant
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
-
 from ...telegram import Common
 from translation import Translation
 from ..utils import filters
 from mega.database.database import is_user_exist, add_user, ban_user, remove_ban, get_all_banned_users, get_ban_status, total_users_count
+
 BOT_START_TIME = time.time()
 
 
@@ -149,7 +149,7 @@ async def _banned_usrs(c, m):
 @Client.on_message(filters.private & filters.command(["status"]))
 async def stats(bot, update):
     total_users = await total_users_count()
-    currentTime = time.strftime("%Hh%Mm%Ss", time.gmtime(time.time() - Config.BOT_START_TIME))
+    currentTime = time.strftime("%Hh%Mm%Ss", time.gmtime(time.time() - BOT_START_TIME))
     total, used, free = shutil.disk_usage(".")
     total = humanbytes(total)
     used = humanbytes(used)
