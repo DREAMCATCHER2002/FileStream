@@ -1,5 +1,5 @@
 class Translation(object):
-    LINK_TEXT = """<u><i><b>🔗 Yᴏᴜʀ Dᴏᴡɴʟᴏᴀᴅ Lɪɴᴋ Gᴇɴᴇʀᴀᴛᴇᴅ 😜</b></i></u>
+    LINK_TEXT = """<i><b>🔗 Yᴏᴜʀ Dᴏᴡɴʟᴏᴀᴅ Lɪɴᴋ Gᴇɴᴇʀᴀᴛᴇᴅ 😜</b></i>
 
 <b>📂 Fɪʟᴇ Nᴀᴍᴇ :</b> <code>{}</code>
 
