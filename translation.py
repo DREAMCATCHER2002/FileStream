@@ -1,7 +1,4 @@
 class Translation(object):
-    FILE_NAME = """<b>File Name:-</b> <code>{}</code>"""
-    FILE_SIZE = """\n<b>File Size:-</b> <code>{}</code>"""
-    FILE_LINK = """\n<b>Direct Download Link:-</b> <code>{}</code>"""
     LINK_TEXT = """<b>Direct Download Link Generated😜</b>
 
 <i>Copy and paste this link in your browser and the file download will start immediately!!</i>
@@ -11,36 +8,33 @@ class Translation(object):
 <b>Direct Download Link:-</b> <i>{}</i>
 
 """
-    START_TEXT = """Hᴇʏ 👋 {} 😍
+    START_TEXT = """
+<i><b>Hᴇʏ 👋 {} 😍</b></i>\n
+<i><b>I'ᴍ Sɪᴍᴘʟᴇ Tᴇʟᴇɢʀᴀᴍ Fɪʟᴇ ᴛᴏ Iɴꜱᴛᴀɴᴛ Pᴇʀᴍᴇɴᴀɴᴛ Dɪʀᴇᴄᴛ Lɪɴᴋ Gᴇɴᴇʀᴀᴛᴏʀ Bᴏᴛ 😜</b></i>\n
+<i><u>🔹 𝗪𝗔𝗥𝗡𝗜𝗡𝗚 🚸</u></i>\n
+<b>🔞 Pʀᴏɴ Cᴏɴᴛᴇɴᴛꜱ Lᴇᴀᴅꜱ ᴛᴏ Pᴇʀᴍᴀɴᴇɴᴛ Bᴀɴ Yᴏᴜ ❌</b>\n
+<b>🤖 Bᴏᴛ Wɪʟʟ Wᴏʀᴋ 24x7</b>\n
+<b>🍃 Rᴇϙᴜᴇsᴛ Mᴏᴠɪᴇs : @FileSearch1Bot</b>"""
 
-I'ᴍ Sɪᴍᴘʟᴇ Tᴇʟᴇɢʀᴀᴍ Fɪʟᴇ ᴛᴏ Iɴꜱᴛᴀɴᴛ Pᴇʀᴍᴇɴᴀɴᴛ Dɪʀᴇᴄᴛ Lɪɴᴋ Gᴇɴᴇʀᴀᴛᴏʀ Bᴏᴛ 😜
+    HELP_TEXT = """
+<i>🔻 Sᴇɴᴅ ᴍᴇ ᴀɴʏ ꜰɪʟᴇ (ᴏʀ) ᴍᴇᴅɪᴀ ꜰʀᴏᴍ ᴛᴇʟᴇɢʀᴀᴍ.</i>
+<i>🔻 I ᴡɪʟʟ ᴘʀᴏᴠɪᴅᴇ ᴇxᴛᴇʀɴᴀʟ ᴅɪʀᴇᴄᴛ ᴅᴏᴡɴʟᴏᴀᴅ ʟɪɴᴋ !.</i>
+<i>🔻 Tʜɪs Pᴇʀᴍᴇᴀɴᴛ Lɪɴᴋ Wɪᴛʜ Fᴀsᴛᴇsᴛ Sᴘᴇᴇᴅ</i>
+<i>🔻 Bᴏᴛ Nᴏᴛ Sᴜᴘᴘᴏʀᴛ Cʜᴀɴɴᴇʟ Oʀ Gʀᴏᴜᴘ !</i>
+<i>🔻 Bᴏᴛ Wɪʟʟ Wᴏʀᴋ 24x7 !</i>\n
+<i><u>🔸 𝗪𝗔𝗥𝗡𝗜𝗡𝗚 🚸</u><i>\n
+<b>🔞 Pʀᴏɴ Cᴏɴᴛᴇɴᴛꜱ Lᴇᴀᴅꜱ ᴛᴏ Pᴇʀᴍᴀɴᴇɴᴛ Bᴀɴ Yᴏᴜ ❌</b>\n
+<i>Cᴏɴᴛᴀᴄᴛ Dᴇᴠᴇʟᴏᴘᴇʀ (Oʀ) Rᴇᴘᴏʀᴛ Bᴜɢꜱ</i> <b>: <a href='https://t.me/OTTHelpbot'>[ ᴄʟɪᴄᴋ ʜᴇʀᴇ ]</a></b>"""
 
-🔹 𝗪𝗔𝗥𝗡𝗜𝗡𝗚 🚸
+    ABOUT_TEXT = """
+<b>⚜ Mʏ Nᴀᴍᴇ : TG File To Link Bot</b>\n
+<b>🔸Bᴜɪʟᴅ Sᴛᴀᴛᴜs : <a href='https://telegram.me/Newdvdupdate'>3.0.1 [BETA]</a></b>\n
+<b>🔹Sᴏᴜʀᴄᴇ : <a href='https://t.me/newdvdupdate'>Cʟɪᴄᴋ Hᴇʀᴇ</a></b>\n
+<b>🔸Cʀᴇᴅɪᴛs : <a href='https://t.me/Newdvdupdate'>Eᴠᴇʀʏᴏɴᴇ ɪɴ ᴛʜɪs Jᴏᴜʀɴᴇʏ</a></b>\n
+<b>🔹Dᴇᴠᴇʟᴏᴘᴇʀ : <a href='https://telegram.me/NewDVDupdate'>Dʀᴇᴀᴍᴄᴀᴛᴄʜᴇʀ</a></b>\n
+<b>🔸Sᴇʀᴠᴇʀ : <a href='https://telegram.me/Newdvdupdate'> AWS (VPS)</a></b>\n
+<b>🔹Sᴜᴘᴘᴏʀᴛ Gʀᴏᴜᴘ : <a href='https://telegram.me/mallumoviezgroup'> Cʟɪᴄᴋ Hᴇʀᴇ</a></b>"""
 
-🔞 Pʀᴏɴ Cᴏɴᴛᴇɴᴛꜱ Lᴇᴀᴅꜱ ᴛᴏ Pᴇʀᴍᴀɴᴇɴᴛ Bᴀɴ Yᴏᴜ ❌
+    JOIN = """<i><b>Hai {}</b>!!
+Sorry Dear Please Subscribe my Project channel then use again me🤭</i>"""
 
-🤖 Bᴏᴛ Wɪʟʟ Wᴏʀᴋ 24x7
-
-🍃 Rᴇϙᴜᴇsᴛ Mᴏᴠɪᴇs : @FileSearch1Bot"""
-    HELP_TEXT = """🔻 Sᴇɴᴅ ᴍᴇ ᴀɴʏ ꜰɪʟᴇ (ᴏʀ) ᴍᴇᴅɪᴀ ꜰʀᴏᴍ ᴛᴇʟᴇɢʀᴀᴍ.
-🔻 I ᴡɪʟʟ ᴘʀᴏᴠɪᴅᴇ ᴇxᴛᴇʀɴᴀʟ ᴅɪʀᴇᴄᴛ ᴅᴏᴡɴʟᴏᴀᴅ ʟɪɴᴋ !.
-🔻 Tʜɪs Pᴇʀᴍᴇᴀɴᴛ Lɪɴᴋ Wɪᴛʜ Fᴀsᴛᴇsᴛ Sᴘᴇᴇᴅ
-🔻 Bᴏᴛ Nᴏᴛ Sᴜᴘᴘᴏʀᴛ Cʜᴀɴɴᴇʟ Oʀ Gʀᴏᴜᴘ !
-🔻 Bᴏᴛ Wɪʟʟ Wᴏʀᴋ 24x7 !
-
-🔸 𝗪𝗔𝗥𝗡𝗜𝗡𝗚 🚸
-
-🔞 Pʀᴏɴ Cᴏɴᴛᴇɴᴛꜱ Lᴇᴀᴅꜱ ᴛᴏ Pᴇʀᴍᴀɴᴇɴᴛ Bᴀɴ Yᴏᴜ ❌
-
-Cᴏɴᴛᴀᴄᴛ Dᴇᴠᴇʟᴏᴘᴇʀ (Oʀ) Rᴇᴘᴏʀᴛ Bᴜɢꜱ : <a href=https://t.me/OTTHelpbot>[ ᴄʟɪᴄᴋ ʜᴇʀᴇ ]</a>"""
-    ABOUT_TEXT = """**➥ My Name** : ```File To Link Bot```
-**➥ Creator** : <a href=https://t.me/D_ar_k_Angel>Dark Angel</a>
-**➥ Credits** : ```Everyone in this journey```
-**➥ Language** : ```Python3```
-**➥ Library** : <a href=https://docs.pyrogram.org>Pyrogram asyncio 0.18.0</a>
-**➥ Source Code** : <a href=https://t.me/kurachkanjiedukkatte>👉 Click Here</a>
-**➥ Server** : ```Heroku```
-**➥ Build Status** : ```V01.1 [BETA]```"""
-    KICK = """You Are <b>B A N N E D</b>🤪"""
-    JOIN = """<code>Sorry Dear You Must Join My Updates Channel for using me 😌😜....</code>"""
-    
