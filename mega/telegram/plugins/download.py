@@ -78,7 +78,7 @@ async def download_user(bot, message):
             ]]
             reply = InlineKeyboardMarkup(btn)
             await first.edit_text(
-                text=Translation.JOIN,
+                text=Translation.JOIN.format(message.from_user.mention),
                 reply_markup=reply)
             return
     else:
@@ -92,7 +92,7 @@ async def download_user(bot, message):
             ]]
             reply = InlineKeyboardMarkup(btn)
             await first.edit_text(
-                text=Translation.JOIN,
+                text=Translation.JOIN.format(message.from_user.mention),
                 reply_markup=reply)
             return
     is_in_gap, sleep_time = await check_time_gap(message.from_user.id)
