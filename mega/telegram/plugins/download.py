@@ -56,12 +56,12 @@ async def check_time_gap(user_id: int):
 @Client.on_message(filters.private & filters.document | filters.video)
 async def download_user(bot, message):
     first = await message.reply_text(
-        text="`Processing....`",
+        text="`Generatin Download Link....`",
         reply_to_message_id=message.message_id)
     ban_status = await get_ban_status(message.chat.id)
     if ban_status['is_banned']:
         await first.edit_text(
-            f"Sorry Dear, You misused me. So you are **Blocked!**.\n\nBlock Reason: __{ban_status['ban_reason']}__"
+            f"Sorry Dear 😞, You misused me. So you are **Blocked! ❌**.\n\n🤦 Block Reason : __{ban_status['ban_reason']}__"
         )
         return
     f_channel = await bot.get_chat(Common().force_sub)
@@ -74,7 +74,7 @@ async def download_user(bot, message):
                 return
         except UserNotParticipant:
             btn = [[
-                InlineKeyboardButton('Join Channel', url=jn_link)
+                InlineKeyboardButton('📢 Join Project Channel 📢', url=jn_link)
             ]]
             reply = InlineKeyboardMarkup(btn)
             await first.edit_text(
@@ -88,7 +88,7 @@ async def download_user(bot, message):
                 return false
         except UserNotParticipant:
             btn = [[
-                InlineKeyboardButton('Join Channel', url=f"https://t.me/{f_channel.username}")
+                InlineKeyboardButton('📢 Join Project Channel 📢', url=f"https://t.me/{f_channel.username}")
             ]]
             reply = InlineKeyboardMarkup(btn)
             await first.edit_text(
@@ -128,8 +128,8 @@ async def download_user(bot, message):
         disable_web_page_preview=True,
         reply_markup=InlineKeyboardMarkup(
             [
-                [InlineKeyboardButton(text=f"📩 Download Link", url=file_link)],
-                [InlineKeyboardButton(text=f"Close 🔐",
+                [InlineKeyboardButton(text=f"📤 Download Link 📤", url=file_link)],
+                [InlineKeyboardButton(text=f"🔐 Close This Link 🔐",
                                           callback_data=f"close_btn")]
             ]
         )
@@ -142,9 +142,9 @@ async def button(bot, update):
         await update.message.delete()
     elif "help_btn" in cb_data:
         btn = [[
-            InlineKeyboardButton('Home', callback_data='home_btn'),
-            InlineKeyboardButton('About', callback_data='about_btn'),
-            InlineKeyboardButton('Close', callback_data='close_btn')
+            InlineKeyboardButton('🏘️ Home', callback_data='home_btn'),
+            InlineKeyboardButton('⚙️ About', callback_data='about_btn'),
+            InlineKeyboardButton('Close 🔐', callback_data='close_btn')
         ]]
         reply_markup = InlineKeyboardMarkup(btn)
         await update.message.edit_text(
@@ -154,9 +154,9 @@ async def button(bot, update):
             disable_web_page_preview=True)
     elif "home_btn" in cb_data:
         btn = [[
-            InlineKeyboardButton('Help', callback_data='help_btn'),
-            InlineKeyboardButton('About', callback_data='about_btn'),
-            InlineKeyboardButton('Close', callback_data='close_btn')
+            InlineKeyboardButton('⚒️ Help', callback_data='help_btn'),
+            InlineKeyboardButton('⚙️ About', callback_data='about_btn'),
+            InlineKeyboardButton('Close 🔐', callback_data='close_btn')
         ]]
         reply_markup = InlineKeyboardMarkup(btn)
         await update.message.edit_text(
@@ -166,9 +166,9 @@ async def button(bot, update):
             disable_web_page_preview=True)
     elif "about_btn" in cb_data:
         btn = [[
-            InlineKeyboardButton('Home', callback_data='home_btn'),
-            InlineKeyboardButton('Help', callback_data='help_btn'),
-            InlineKeyboardButton('Close', callback_data='close_btn')
+            InlineKeyboardButton('🏘️ Home', callback_data='home_btn'),
+            InlineKeyboardButton('⚒️ Help', callback_data='help_btn'),
+            InlineKeyboardButton('Close 🔐', callback_data='close_btn')
         ]]
         reply_markup = InlineKeyboardMarkup(btn)
         await update.message.edit_text(
