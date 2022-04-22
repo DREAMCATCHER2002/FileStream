@@ -56,7 +56,7 @@ async def check_time_gap(user_id: int):
 @Client.on_message(filters.private & filters.document | filters.video)
 async def download_user(bot, message):
     first = await message.reply_text(
-        text="`Generatin Download Link....`",
+        text="`Generating Download Link....`",
         reply_to_message_id=message.message_id)
     ban_status = await get_ban_status(message.chat.id)
     if ban_status['is_banned']:
