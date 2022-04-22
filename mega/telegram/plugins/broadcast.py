@@ -36,12 +36,15 @@ async def send_msg(user_id, message):
     except Exception as e:
         return 500, f"{user_id} : {traceback.format_exc()}\n"
         
-@Client.on_message(filters.private & filters.command(["broadcast"]) & filters.reply, group = 1)
+@Client.on_message(filters.private & filters.command(["broadcast"]), group = 1)
 async def broadcast_(c, m):
     print("all_good")
     owner = Common().owner
     if m.from_user.id not in owner:
         await m.reply_text("__This is not for you__")
+        return
+    if not m.reply_to_message:
+        await m.reply("**Reply to any text message**")
         return
     all_users = await get_all_users()
     broadcast_msg = m.reply_to_message
