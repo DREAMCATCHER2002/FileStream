@@ -1,18 +1,24 @@
 class Translation(object):
-    LINK_TEXT = """<b>Direct Download Link Generated😜</b>
+    LINK_TEXT = """<i><b>🔗 Yᴏᴜʀ Dᴏᴡɴʟᴏᴀᴅ Lɪɴᴋ Gᴇɴᴇʀᴀᴛᴇᴅ 😜</b></i>
 
-<i>Copy and paste this link in your browser and the file download will start immediately!!</i>
+<b>📂 Fɪʟᴇ Nᴀᴍᴇ :</b> <code>{}</code>
 
-<b>File Name :- </b> <code>{}</code>
-<b>File Size:-</b> <code>{}</code>
-<b>Direct Download Link:-</b> <i>{}</i>
+<b>📦 Fɪʟᴇ Sɪᴢᴇ : {}</b>
+
+<b>📥 Dᴏᴡɴʟᴏᴀᴅ Lɪɴᴋ : {}</b>
+
+🚀 <b>Cᴏᴘʏ ᴀɴᴅ Pᴀꜱᴛᴇ Tʜɪꜱ Lɪɴᴋ ɪɴ Yᴏᴜʀ Bʀᴏᴡꜱᴇʀ ᴀɴᴅ ᴛʜᴇ Fɪʟᴇ Dᴏᴡɴʟᴏᴀᴅ Wɪʟʟ Sᴛᴀʀᴛ Iᴍᴍᴇᴅɪᴀᴛᴇʟʏ!!</b>
+
+🚸 <b>Nᴏᴛᴇ : Tʜɪs Pᴇʀᴍᴀɴᴇɴᴛ Lɪɴᴋ, Nᴏᴛ Exᴘɪʀᴇᴅ</b>
+
+📽️ <b>Rᴇϙᴜᴇsᴛ Mᴏᴠɪᴇs : @FileSearch1Bot</b>
 
 """
     START_TEXT = """
 <i><b>Hᴇʏ 👋 {} 😍</b></i>\n
 <i><b>I'ᴍ Sɪᴍᴘʟᴇ Tᴇʟᴇɢʀᴀᴍ Fɪʟᴇ ᴛᴏ Iɴꜱᴛᴀɴᴛ Pᴇʀᴍᴇɴᴀɴᴛ Dɪʀᴇᴄᴛ Lɪɴᴋ Gᴇɴᴇʀᴀᴛᴏʀ Bᴏᴛ 😜</b></i>\n
 <i><u>🔹 𝗪𝗔𝗥𝗡𝗜𝗡𝗚 🚸</u></i>\n
-<b>🔞 Pʀᴏɴ Cᴏɴᴛᴇɴᴛꜱ Lᴇᴀᴅꜱ ᴛᴏ Pᴇʀᴍᴀɴᴇɴᴛ Bᴀɴ Yᴏᴜ ❌</b>\n
+<b>🔞 Pᴏʀɴ Cᴏɴᴛᴇɴᴛꜱ Lᴇᴀᴅꜱ ᴛᴏ Pᴇʀᴍᴀɴᴇɴᴛ Bᴀɴ Yᴏᴜ ❌</b>\n
 <b>🤖 Bᴏᴛ Wɪʟʟ Wᴏʀᴋ 24x7</b>\n
 <b>🍃 Rᴇϙᴜᴇsᴛ Mᴏᴠɪᴇs : @FileSearch1Bot</b>"""
 
@@ -23,18 +29,19 @@ class Translation(object):
 <i>🔻 Bᴏᴛ Nᴏᴛ Sᴜᴘᴘᴏʀᴛ Cʜᴀɴɴᴇʟ Oʀ Gʀᴏᴜᴘ !</i>
 <i>🔻 Bᴏᴛ Wɪʟʟ Wᴏʀᴋ 24x7 !</i>\n
 <i><u>🔸 𝗪𝗔𝗥𝗡𝗜𝗡𝗚 🚸</u></i>\n
-<b>🔞 Pʀᴏɴ Cᴏɴᴛᴇɴᴛꜱ Lᴇᴀᴅꜱ ᴛᴏ Pᴇʀᴍᴀɴᴇɴᴛ Bᴀɴ Yᴏᴜ ❌</b>\n
+<b>🔞 Pᴏʀɴ Cᴏɴᴛᴇɴᴛꜱ Lᴇᴀᴅꜱ ᴛᴏ Pᴇʀᴍᴀɴᴇɴᴛ Bᴀɴ Yᴏᴜ ❌</b>\n
 <i>Cᴏɴᴛᴀᴄᴛ Dᴇᴠᴇʟᴏᴘᴇʀ (Oʀ) Rᴇᴘᴏʀᴛ Bᴜɢꜱ</i> <b>: <a href='https://t.me/OTTHelpbot'>[ ᴄʟɪᴄᴋ ʜᴇʀᴇ ]</a></b>"""
 
     ABOUT_TEXT = """
-<b>⚜ Mʏ Nᴀᴍᴇ : TG File To Link Bot</b>\n
-<b>🔸Bᴜɪʟᴅ Sᴛᴀᴛᴜs : <a href='https://telegram.me/Newdvdupdate'>3.0.1 [BETA]</a></b>\n
-<b>🔹Sᴏᴜʀᴄᴇ : <a href='https://t.me/newdvdupdate'>Cʟɪᴄᴋ Hᴇʀᴇ</a></b>\n
-<b>🔸Cʀᴇᴅɪᴛs : <a href='https://t.me/Newdvdupdate'>Eᴠᴇʀʏᴏɴᴇ ɪɴ ᴛʜɪs Jᴏᴜʀɴᴇʏ</a></b>\n
-<b>🔹Dᴇᴠᴇʟᴏᴘᴇʀ : <a href='https://telegram.me/NewDVDupdate'>Dʀᴇᴀᴍᴄᴀᴛᴄʜᴇʀ</a></b>\n
-<b>🔸Sᴇʀᴠᴇʀ : <a href='https://telegram.me/Newdvdupdate'> AWS (VPS)</a></b>\n
-<b>🔹Sᴜᴘᴘᴏʀᴛ Gʀᴏᴜᴘ : <a href='https://telegram.me/mallumoviezgroup'> Cʟɪᴄᴋ Hᴇʀᴇ</a></b>"""
+<b>⚜ Mʏ Nᴀᴍᴇ : 📂 TG File To Link Bot Pro 🔗</b>\n
+<b>🔸Bᴜɪʟᴅ Sᴛᴀᴛᴜs : <a href='https://telegram.me/ottupdatetg'>3.0.1 [BETA]</a></b>\n
+<b>🔹Sᴏᴜʀᴄᴇ : <a href='https://t.me/ottupdatetg'>Cʟɪᴄᴋ Hᴇʀᴇ</a></b>\n
+<b>🔸Cʀᴇᴅɪᴛs : <a href='https://t.me/ottupdatetg'>Eᴠᴇʀʏᴏɴᴇ ɪɴ ᴛʜɪs Jᴏᴜʀɴᴇʏ</a></b>\n
+<b>🔹Dᴇᴠᴇʟᴏᴘᴇʀ : <a href='https://telegram.me/OTThelpbot'>Dʀᴇᴀᴍᴄᴀᴛᴄʜᴇʀ</a></b>\n
+<b>🔸Sᴇʀᴠᴇʀ : <a href='https://telegram.me/OTTupdateTG'> Oracle (VPS)</a></b>\n
+<b>🔹Sᴜᴘᴘᴏʀᴛ Gʀᴏᴜᴘ : <a href='https://telegram.me/mm_moviegroup1'> Cʟɪᴄᴋ Hᴇʀᴇ</a></b>"""
 
-    JOIN = """<i><b>Hai {}</b>!!
-Sorry Dear Please Subscribe my Project channel then use again me🤭</i>"""
+    JOIN = """<b>Hai 👋 {}</b> 😍
+
+<b>Sorry Dear Please Subscribe my Project channel then use again me 🤭</b>"""
 
