@@ -32,12 +32,12 @@ async def start(bot, update):
         await add_user(update.chat.id)
         await bot.send_message(
             chat_id=Common().bot_dustbin,
-            text=f"<b>#NEWUSER</b>\n<b>Name : {update.from_user.mention}</b>\n<b>User id :</b> <code>{update.from_user.id}</code>",
+            text=f"<b>#NEWUSER</b>\n\n<b>Name : {update.from_user.mention}</b>\n<b>User id :</b> <code>{update.from_user.id}</code>",
             parse_mode='html')        
     btn = [[
-        InlineKeyboardButton('Help', callback_data='help_btn'),
-        InlineKeyboardButton('About', callback_data='about_btn'),
-        InlineKeyboardButton('Close', callback_data='close_btn')
+        InlineKeyboardButton('⚒️ Help', callback_data='help_btn'),
+        InlineKeyboardButton('⚙️ About', callback_data='about_btn'),
+        InlineKeyboardButton('Close 🔐', callback_data='close_btn')
     ]]
     reply_markup = InlineKeyboardMarkup(btn)
     await update.reply_photo(
@@ -52,12 +52,12 @@ async def help_user(bot, update):
         await add_user(update.chat.id)
         await bot.send_message(
             chat_id=Common().bot_dustbin,
-            text=f"<b>#NEWUSER</b>\n<b>Name : {update.from_user.mention}</b>\n<b>User id :</b> <code>{update.from_user.id}</code>",
+            text=f"<b>#NEWUSER</b>\n\n<b>Name : {update.from_user.mention}</b>\n<b>User id :</b> <code>{update.from_user.id}</code>",
             parse_mode='html')        
     btn = [[
-        InlineKeyboardButton('Home', callback_data='home_btn'),
-        InlineKeyboardButton('About', callback_data='about_btn'),
-        InlineKeyboardButton('Close', callback_data='close_btn')
+        InlineKeyboardButton('🏘️ Home', callback_data='home_btn'),
+        InlineKeyboardButton('⚙️ About', callback_data='about_btn'),
+        InlineKeyboardButton('Close 🔐', callback_data='close_btn')
     ]]
     reply_markup = InlineKeyboardMarkup(btn)
     await bot.send_message(
@@ -74,12 +74,12 @@ async def about_user(bot, update):
         await add_user(update.chat.id)
         await bot.send_message(
             chat_id=Common().bot_dustbin,
-            text=f"<b>#NEWUSER</b>\n<b>Name : {update.from_user.mention}</b>\n<b>User id :</b> <code>{update.from_user.id}</code>",
+            text=f"<b>#NEWUSER</b>\n\n<b>Name : {update.from_user.mention}</b>\n<b>User id :</b> <code>{update.from_user.id}</code>",
             parse_mode='html')        
     btn = [[
-        InlineKeyboardButton('Home', callback_data='home_btn'),
-        InlineKeyboardButton('Help', callback_data='help_btn'),
-        InlineKeyboardButton('Close', callback_data='close_btn')
+        InlineKeyboardButton('🏘️ Home', callback_data='home_btn'),
+        InlineKeyboardButton('⚒️ Help', callback_data='help_btn'),
+        InlineKeyboardButton('Close 🔐', callback_data='close_btn')
     ]]
     reply_markup = InlineKeyboardMarkup(btn)
     await update.reply_text(
@@ -189,7 +189,7 @@ async def stats(bot, update):
         await add_user(update.chat.id)
         await bot.send_message(
             chat_id=Common().bot_dustbin,
-            text=f"<b>#NEWUSER</b>\n<b>Name : {update.from_user.mention}</b>\n<b>User id :</b> <code>{update.from_user.id}</code>",
+            text=f"<b>#NEWUSER</b>\n\n<b>Name : {update.from_user.mention}</b>\n<b>User id :</b> <code>{update.from_user.id}</code>",
             parse_mode='html')        
     total_users = await total_users_count()
     currentTime = time.strftime("%Hh%Mm%Ss", time.gmtime(time.time() - BOT_START_TIME))
