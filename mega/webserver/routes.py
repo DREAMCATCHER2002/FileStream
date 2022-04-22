@@ -18,7 +18,7 @@ async def root_route_handler(request):
                               "bot_associated_w": bot_details.username})
 
 
-@routes.get("/{message_id}/{file_name}")
+@routes.get("/WhitE_DeviL09/{message_id}/{file_name}")
 async def stream_handler(request):
     try:
         message_id = int(request.match_info['message_id'])
