@@ -48,6 +48,12 @@ async def start(bot, update):
 
 @Client.on_message(filters.private & filters.command(["help"]))
 async def help_user(bot, update):
+    if not await is_user_exist(update.chat.id):
+        await add_user(update.chat.id)
+        await bot.send_message(
+            chat_id=Common().bot_dustbin,
+            text=f"<b>#NEWUSER</b>\n<b>Name : {update.from_user.mention}</b>\n<b>User id :</b> <code>{update.from_user.id}</code>",
+            parse_mode='html')        
     btn = [[
         InlineKeyboardButton('Home', callback_data='home_btn'),
         InlineKeyboardButton('About', callback_data='about_btn'),
@@ -64,6 +70,12 @@ async def help_user(bot, update):
 
 @Client.on_message(filters.private & filters.command(["about"]))
 async def about_user(bot, update):
+    if not await is_user_exist(update.chat.id):
+        await add_user(update.chat.id)
+        await bot.send_message(
+            chat_id=Common().bot_dustbin,
+            text=f"<b>#NEWUSER</b>\n<b>Name : {update.from_user.mention}</b>\n<b>User id :</b> <code>{update.from_user.id}</code>",
+            parse_mode='html')        
     btn = [[
         InlineKeyboardButton('Home', callback_data='home_btn'),
         InlineKeyboardButton('Help', callback_data='help_btn'),
@@ -173,6 +185,12 @@ async def _banned_usrs(c, m):
 
 @Client.on_message(filters.private & filters.command(["status"]))
 async def stats(bot, update):
+    if not await is_user_exist(update.chat.id):
+        await add_user(update.chat.id)
+        await bot.send_message(
+            chat_id=Common().bot_dustbin,
+            text=f"<b>#NEWUSER</b>\n<b>Name : {update.from_user.mention}</b>\n<b>User id :</b> <code>{update.from_user.id}</code>",
+            parse_mode='html')        
     total_users = await total_users_count()
     currentTime = time.strftime("%Hh%Mm%Ss", time.gmtime(time.time() - BOT_START_TIME))
     total, used, free = shutil.disk_usage(".")
@@ -183,7 +201,8 @@ async def stats(bot, update):
     banned_usr_count = 0
     async for banned_user in all_banned_users:
         banned_usr_count += 1
-    text = f"""`Uptime : {currentTime}
+    text = f"""--**Bot Status**--
+`Uptime : {currentTime}
 Disk space : {total}
 Used : {used}
 Free : {free}
