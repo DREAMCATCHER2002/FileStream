@@ -73,12 +73,14 @@ async def download_user(bot, message):
             if chat.status=='kicked':
                 return
         except UserNotParticipant:
+            await first.delete()
             btn = [[
                 InlineKeyboardButton('📢 Join Project Channel 📢', url=jn_link)
             ]]
             reply = InlineKeyboardMarkup(btn)
-            await first.edit_text(
-                text=Translation.JOIN.format(message.from_user.mention),
+            await message.reply_photo(
+                photo="https://te.legra.ph/file/f838b9c4154a9f539958a.jpg",
+                caption=Translation.JOIN.format(message.from_user.mention),
                 reply_markup=reply)
             return
     else:
@@ -87,12 +89,14 @@ async def download_user(bot, message):
             if chat.status=='kicked':
                 return false
         except UserNotParticipant:
+            await first.delete()
             btn = [[
                 InlineKeyboardButton('📢 Join Project Channel 📢', url=f"https://t.me/{f_channel.username}")
             ]]
             reply = InlineKeyboardMarkup(btn)
-            await first.edit_text(
-                text=Translation.JOIN.format(message.from_user.mention),
+            await message.reply_photo(
+                photo="https://te.legra.ph/file/f838b9c4154a9f539958a.jpg",
+                caption=Translation.JOIN.format(message.from_user.mention),
                 reply_markup=reply)
             return
     is_in_gap, sleep_time = await check_time_gap(message.from_user.id)
