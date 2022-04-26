@@ -61,7 +61,7 @@ async def download_user(bot, message):
     ban_status = await get_ban_status(message.chat.id)
     if ban_status['is_banned']:
         await first.edit_text(
-            f"Sorry Dear 😞, You misused me. So you are **Blocked! ❌**.\n\n🤦 Block Reason : __{ban_status['ban_reason']}__"
+            f"**Sorry Dear 😞, You miss used me. So you are Blocked! ❌.\n\n🤦 Block Reason : __{ban_status['ban_reason']}__**"
         )
         return
     f_channel = await bot.get_chat(Common().force_sub)
