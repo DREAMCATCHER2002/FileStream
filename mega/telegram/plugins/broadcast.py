@@ -9,10 +9,8 @@ import traceback
 import random
 import string
 import time
-import os
-from random import choice
+
 from pyrogram import filters, Client
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from pyrogram.errors import FloodWait, InputUserDeactivated, UserIsBlocked, PeerIdInvalid
 from mega.common import Common
 from mega.database.database import get_all_users, total_users_count, delete_user
@@ -25,7 +23,7 @@ async def send_msg(user_id, message):
      #   await msg.pin(both_sides=True)
         return 200, None
     except FloodWait as e:
-        await asyncio.sleep(e.x)
+        await asyncio.sleep(e.value)
         return send_msg(user_id, message)
     except InputUserDeactivated:
         return 400, f"{user_id} : deactivated\n"

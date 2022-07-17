@@ -1,14 +1,11 @@
-import traceback
-import asyncio
+import os
 import time
 import shutil
-import humanfriendly as humanbyte
-from pyrogram import filters, emoji, Client
-from pyrogram.errors import MessageNotModified, UserNotParticipant
-from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
+from pyrogram import filters, Client, enums
+from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
+from pyrogram.errors import PeerIdInvalid
 from ...telegram import Common
 from translation import Translation
-from ..utils import filters
 from mega.database.database import is_user_exist, add_user, ban_user, remove_ban, get_all_banned_users, get_ban_status, total_users_count
 
 BOT_START_TIME = time.time()
@@ -27,13 +24,13 @@ def humanbytes(size):
 
 
 @Client.on_message(filters.private & filters.command(["start"]))
-async def start(bot, update):
+async def start(bot: Client, update: Message):
     if not await is_user_exist(update.chat.id):
         await add_user(update.chat.id)
         await bot.send_message(
             chat_id=Common().bot_dustbin,
             text=f"<b>#NEWUSER</b>\n\n<b>Name : {update.from_user.mention}</b>\n<b>User id :</b> <code>{update.from_user.id}</code>",
-            parse_mode='html')        
+            parse_mode=enums.ParseMode.HTML)        
     btn = [[
         InlineKeyboardButton('⚒️ Help', callback_data='help_btn'),
         InlineKeyboardButton('⚙️ About', callback_data='about_btn'),
@@ -43,17 +40,17 @@ async def start(bot, update):
     await update.reply_photo(
         photo='https://te.legra.ph/file/e5830830ab2f987e694c0.jpg',
         caption=Translation.START_TEXT.format(update.from_user.first_name),
-        parse_mode="html",
+        parse_mode=enums.ParseMode.HTML,
         reply_markup=reply_markup)
 
 @Client.on_message(filters.private & filters.command(["help"]))
-async def help_user(bot, update):
+async def help_user(bot: Client, update: Message):
     if not await is_user_exist(update.chat.id):
         await add_user(update.chat.id)
         await bot.send_message(
             chat_id=Common().bot_dustbin,
             text=f"<b>#NEWUSER</b>\n\n<b>Name : {update.from_user.mention}</b>\n<b>User id :</b> <code>{update.from_user.id}</code>",
-            parse_mode='html')        
+            parse_mode=enums.ParseMode.HTML)        
     btn = [[
         InlineKeyboardButton('🏘️ Home', callback_data='home_btn'),
         InlineKeyboardButton('⚙️ About', callback_data='about_btn'),
@@ -64,18 +61,18 @@ async def help_user(bot, update):
         chat_id=update.chat.id,
         text=Translation.HELP_TEXT.format(
                 update.from_user.first_name),
-        parse_mode="html",
+        parse_mode=enums.ParseMode.HTML,
         reply_markup=reply_markup,
         disable_web_page_preview=True)
 
 @Client.on_message(filters.private & filters.command(["about"]))
-async def about_user(bot, update):
+async def about_user(bot: Client, update: Message):
     if not await is_user_exist(update.chat.id):
         await add_user(update.chat.id)
         await bot.send_message(
             chat_id=Common().bot_dustbin,
             text=f"<b>#NEWUSER</b>\n\n<b>Name : {update.from_user.mention}</b>\n<b>User id :</b> <code>{update.from_user.id}</code>",
-            parse_mode='html')        
+            parse_mode=enums.ParseMode.HTML)        
     btn = [[
         InlineKeyboardButton('🏘️ Home', callback_data='home_btn'),
         InlineKeyboardButton('⚒️ Help', callback_data='help_btn'),
@@ -85,11 +82,11 @@ async def about_user(bot, update):
     await update.reply_text(
         text=Translation.ABOUT_TEXT,
         reply_markup=reply_markup,
-        parse_mode="html",
+        parse_mode=enums.ParseMode.HTML,
         disable_web_page_preview=True)
 
 @Client.on_message(filters.private & filters.command('ban'))
-async def banuser(bot, message):
+async def banuser(bot: Client, message: Message):
     owner = Common().owner
     if message.from_user.id not in owner:
         await message.reply_text("__This is not for you__")
@@ -127,7 +124,7 @@ async def banuser(bot, message):
         )
   
 @Client.on_message(filters.private & filters.command('unban'))
-async def unban_a_user(bot, message):
+async def unban_a_user(bot: Client, message: Message):
     owner = Common().owner
     if message.from_user.id not in owner:
         await message.reply_text("__This is not for you__")
@@ -161,7 +158,7 @@ async def unban_a_user(bot, message):
         await message.reply(f"<b>Successfully Unbanned : {k.mention} 🤝</b>")
 
 @Client.on_message(filters.private & filters.command(["banlist"]))
-async def _banned_usrs(c, m):
+async def _banned_usrs(c, m: Message):
     owner = Common().owner
     if m.from_user.id not in owner:
         await m.reply_text("__This is not for you__")
@@ -184,13 +181,13 @@ async def _banned_usrs(c, m):
     await m.reply_text(reply_text, True)
 
 @Client.on_message(filters.private & filters.command(["status"]))
-async def stats(bot, update):
+async def stats(bot: Client, update: Message):
     if not await is_user_exist(update.chat.id):
         await add_user(update.chat.id)
         await bot.send_message(
             chat_id=Common().bot_dustbin,
             text=f"<b>#NEWUSER</b>\n\n<b>Name : {update.from_user.mention}</b>\n<b>User id :</b> <code>{update.from_user.id}</code>",
-            parse_mode='html')        
+            parse_mode=enums.ParseMode.HTML)        
     total_users = await total_users_count()
     currentTime = time.strftime("%Hh%Mm%Ss", time.gmtime(time.time() - BOT_START_TIME))
     total, used, free = shutil.disk_usage(".")
@@ -199,7 +196,7 @@ async def stats(bot, update):
     free = humanbytes(free)
     all_banned_users = await get_all_banned_users()
     banned_usr_count = 0
-    async for banned_user in all_banned_users:
+    async for _ in all_banned_users:
         banned_usr_count += 1
     text = f"""--**Bot Status**--
 `Uptime : {currentTime}
