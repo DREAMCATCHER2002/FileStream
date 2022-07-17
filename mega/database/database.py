@@ -1,4 +1,3 @@
-import os
 import datetime
 import motor.motor_asyncio
 from mega.common import Common

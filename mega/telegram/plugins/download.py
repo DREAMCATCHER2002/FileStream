@@ -1,22 +1,11 @@
-import os
-import re
 import time
-import datetime
-import secrets
-import asyncio
-import logging
-import humanfriendly as size
-import humanfriendly as humanbyte
 import urllib.parse
-from sample_config import Config
 from mega.common import Common
-from pyrogram import emoji, Client
-from pyrogram.errors import MessageNotModified, UserNotParticipant
-from mega.telegram.utils.custom_download import TGCustomYield
-from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery, ForceReply
+from pyrogram import Client, enums, filters
+from pyrogram.errors import UserNotParticipant
+from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 from translation import Translation
-from mega.database.database import remove_ban, get_ban_status
-from ..utils import filters
+from mega.database.database import get_ban_status
 
 GAP = {}
 
@@ -54,10 +43,10 @@ async def check_time_gap(user_id: int):
 
 
 @Client.on_message(filters.private & filters.document | filters.video)
-async def download_user(bot, message):
+async def download_user(bot: Client, message: Message):
     first = await message.reply_text(
         text="`Generating Download Link....`",
-        reply_to_message_id=message.message_id)
+        reply_to_message_id=message.id)
     ban_status = await get_ban_status(message.chat.id)
     if ban_status['is_banned']:
         await first.edit_text(
@@ -87,7 +76,7 @@ async def download_user(bot, message):
         try:
             chat = await bot.get_chat_member(f_channel.username, message.chat.id)
             if chat.status=='kicked':
-                return false
+                return False
         except UserNotParticipant:
             await first.delete()
             btn = [[
@@ -118,13 +107,13 @@ async def download_user(bot, message):
         file_size = get_size(message.document.file_size)
         #file_size = humanbyte.format_size(message.document.file_size, binary=True)
 
-    file_link = f"https://{Common().web_fqdn}/WhitE_DeviL09/{fd_msg.message_id}/{file_name}" if Common().on_heroku else \
-        f"http://{Common().web_fqdn}:{Common().web_port}/{fd_msg.message_id}"
+    file_link = f"https://{Common().web_fqdn}/WhitE_DeviL09/{fd_msg.id}/{file_name}" if Common().on_heroku else \
+        f"http://{Common().web_fqdn}:{Common().web_port}/{fd_msg.id}"
     await fd_msg.reply_text(
         text=f"**Requested By :** [{message.from_user.first_name}](tg://user?id={message.chat.id})\n**User id :** `{message.from_user.id}`\n**Download Link :** __{file_link}__",
         quote=True,
         disable_web_page_preview=True,
-        parse_mode='md'
+        parse_mode=enums.ParseMode.MARKDOWN
     )
 
     await first.edit(
@@ -140,7 +129,7 @@ async def download_user(bot, message):
     )
 
 @Client.on_callback_query()
-async def button(bot, update):
+async def button(bot, update: CallbackQuery):
     cb_data = update.data
     if "close_btn" in cb_data:
         await update.message.delete()
@@ -153,7 +142,7 @@ async def button(bot, update):
         reply_markup = InlineKeyboardMarkup(btn)
         await update.message.edit_text(
             text=Translation.HELP_TEXT,
-            parse_mode="html",
+            parse_mode=enums.ParseMode.HTML,
             reply_markup=reply_markup,
             disable_web_page_preview=True)
     elif "home_btn" in cb_data:
@@ -165,7 +154,7 @@ async def button(bot, update):
         reply_markup = InlineKeyboardMarkup(btn)
         await update.message.edit_text(
             text=Translation.START_TEXT.format(update.from_user.first_name),
-            parse_mode="html",
+            parse_mode=enums.ParseMode.HTML,
             reply_markup=reply_markup,
             disable_web_page_preview=True)
     elif "about_btn" in cb_data:
@@ -178,7 +167,7 @@ async def button(bot, update):
         await update.message.edit_text(
             text=Translation.ABOUT_TEXT,
             reply_markup=reply_markup,
-            parse_mode="html",
+            parse_mode=enums.ParseMode.HTML,
             disable_web_page_preview=True)        
         
     
