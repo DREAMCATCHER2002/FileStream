@@ -15,5 +15,5 @@ jobs:
           heroku_api_key: "750f1a38-91bf-4e23-83aa-131a854b1bb6"
           heroku_app_name: "file-to-link-09" #Must be unique in Heroku
           heroku_email: "autofilterbotv2@gmail.com"
-          branch: "dev"
+      #    branch: "dev"
       #    usedocker: true
